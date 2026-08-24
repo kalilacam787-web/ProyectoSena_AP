@@ -7,34 +7,24 @@ use Illuminate\Http\Request;
 
 class TrainingCenterController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $trainingCenters = Training_Center::all();
+        $search = trim((string) $request->query('location', ''));
+        $locationOptions = Training_Center::query()
+            ->get(['name', 'location'])
+            ->flatMap(fn ($center) => [$center->name, $center->location])
+            ->unique()
+            ->values();
+        $trainingCenters = Training_Center::with('courses')
+            ->when($search !== '', function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%")
+                        ->orWhere('location', 'like', "%{$search}%");
+                });
+            })
+            ->get();
 
-        $officialCenters = collect([
-            [
-                'name' => 'Centro Agropecuario',
-                'location' => 'Km 5 vía al Tambo, Popayán, Cauca',
-            ],
-            [
-                'name' => 'Centro de Comercio y Servicios',
-                'location' => 'Calle 4 No. 2-80, Popayán, Cauca',
-            ],
-            [
-                'name' => 'Centro de Teleinformática y Producción Industrial',
-                'location' => 'Carrera 9 No. 71N-60, Popayán, Cauca',
-            ],
-            [
-                'name' => 'Centro Industrial del Cauca',
-                'location' => 'Carrera 13 No. 3-60, Santander de Quilichao, Cauca',
-            ],
-            [
-                'name' => 'Centro Agroindustrial del Cauca',
-                'location' => 'Calle 5 No. 8-20, Puerto Tejada, Cauca',
-            ],
-        ]);
-
-        return view('Training_Center.index', compact('trainingCenters', 'officialCenters'));
+        return view('Training_Center.index', compact('trainingCenters', 'search', 'locationOptions'));
     }
 
     public function create()

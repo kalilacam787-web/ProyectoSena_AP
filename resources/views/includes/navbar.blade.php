@@ -5,11 +5,7 @@
     </a>
 
     <div class="d-flex align-items-center gap-2">
-      @if(auth()->check())
-        <a class="btn btn-nav-action btn-nav-primary" href="{{ route('admin.profile') }}">Perfil</a>
-      @else
-        <a class="btn btn-nav-action" href="{{ route('login') }}">Iniciar sesión</a>
-      @endif
+      <a class="btn btn-nav-action btn-nav-primary" href="{{ route('login') }}">Iniciar sesión</a>
 
       <div class="dropdown">
         <button class="btn btn-nav-action btn-nav-primary navbar-menu-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -17,8 +13,9 @@
         </button>
         <ul class="dropdown-menu dropdown-menu-end navbar-menu-dropdown">
         @auth
-          <li class="dropdown-header admin-menu-heading">ADMINISTRADOR</li>
-          <li><a class="dropdown-item admin-menu-link" href="{{ route('admin.profile') }}"><i class="fas fa-user-shield me-2"></i>Perfil y gestión</a></li>
+          <li class="dropdown-header admin-menu-heading">PERFIL ADMIN</li>
+          <li><a class="dropdown-item admin-menu-link" href="{{ route('admin.profile') }}"><i class="fas fa-user-shield me-2"></i>Perfil Admin</a></li>
+          <li><span class="dropdown-item-text admin-menu-description">Funciones de gestión del administrador</span></li>
           <li><hr class="dropdown-divider"></li>
         @endauth
         <li><a class="dropdown-item" href="{{ route('contacts.index') }}">Contáctanos</a></li>

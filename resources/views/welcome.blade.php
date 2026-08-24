@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid px-0">
     @if($galleries && count($galleries) > 0)
-    <div id="galleryCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+    <div id="galleryCarousel" class="carousel slide mb-4" data-bs-ride="carousel" data-bs-interval="8000" data-bs-wrap="true" data-bs-pause="false">
         <div class="carousel-inner">
             @foreach($galleries as $key => $gallery)
                 @php
@@ -71,25 +71,14 @@
         </div>
 
         <!-- Secciones principales -->
-        <div class="row g-4 mb-5">
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm function-card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-users fa-3x text-primary mb-3"></i>
-                        <h3 class="card-title">Gestión de Aprendices</h3>
-                        <p class="card-text">Administra la información de aprendices, registro y seguimiento.</p>
-                        <a href="{{ route('apprentices.index') }}" class="btn btn-primary">Ver Aprendices</a>
-                    </div>
-                </div>
-            </div>
-
+        <div class="row g-4 mb-5 welcome-information">
             <div class="col-lg-4 col-md-6">
                 <div class="card h-100 shadow-sm function-card">
                     <div class="card-body text-center">
                         <i class="fas fa-book fa-3x text-success mb-3"></i>
-                        <h3 class="card-title">Cursos y Áreas</h3>
-                        <p class="card-text">Organiza y gestiona cursos, áreas de formación y especialidades.</p>
-                        <a href="{{ route('courses.index') }}" class="btn btn-success">Ver Cursos</a>
+                        <h3 class="card-title">Ofertas educativas</h3>
+                        <p class="card-text">Explora cursos y carreras técnicas de diferentes áreas de formación.</p>
+                        <a href="{{ route('courses.index') }}" class="btn btn-success">Ver ofertas</a>
                     </div>
                 </div>
             </div>
@@ -101,6 +90,17 @@
                         <h3 class="card-title">Centros de formación</h3>
                         <p class="card-text">Consulta cinco sedes oficiales del SENA en el departamento del Cauca.</p>
                         <a href="{{ route('training-centers.index') }}" class="btn btn-success">Ver centros</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 shadow-sm function-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                        <h3 class="card-title">Gestión de Aprendices</h3>
+                        <p class="card-text">Consulta programa, computador, centro de formación y datos personales.</p>
+                        <a href="{{ route('apprentices.index') }}" class="btn btn-primary">Ver aprendices</a>
                     </div>
                 </div>
             </div>
@@ -126,7 +126,7 @@
                     </li>
                     <li class="list-group-item border-0 py-2">
                         <i class="fas fa-check text-success me-2"></i>
-                        <span class="fs-5">Control de cursos y áreas</span>
+                        <span class="fs-5">Cursos y carreras técnicas</span>
                     </li>
                     <li class="list-group-item border-0 py-2">
                         <i class="fas fa-check text-success me-2"></i>

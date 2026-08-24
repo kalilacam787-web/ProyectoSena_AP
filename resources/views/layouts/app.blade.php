@@ -12,9 +12,7 @@
 
 <body>
 
-    @if (request()->path() === '/')
-        @include('includes.navbar')
-    @endif
+    @include('includes.navbar')
 
     @if (request()->path() !== '/')
         <button type="button" class="back-button" onclick="window.history.length > 1 ? window.history.back() : window.location.href='{{ url('/') }}'" aria-label="Volver a la página anterior" title="Volver">

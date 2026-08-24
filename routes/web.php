@@ -22,6 +22,7 @@ Route::get('/', function () {
     if (is_dir($folderPath)) {
         $projectImages = collect(glob($folderPath . DIRECTORY_SEPARATOR . '*'))
             ->filter(fn ($file) => is_file($file))
+            ->reject(fn ($file) => strtolower(basename($file)) === 'images.png')
             ->map(function ($file) {
                 return (object) [
                     'title' => '',
@@ -44,6 +45,8 @@ Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('apprentices/access', [AuthController::class, 'showApprenticeAccess'])->name('apprentices.access');
+Route::post('apprentices/access', [AuthController::class, 'apprenticeAccess']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin/perfil', [AdminController::class, 'profile'])->name('admin.profile');
@@ -78,7 +81,11 @@ Route::get('teachers/create', [TeacherController::class, 'create'])->name('teach
 Route::post('teachers', [TeacherController::class, 'store'])->name('teachers.store');
 
 // Apprentices Routes
-Route::get('apprentices', [ApprenticeController::class, 'index'])->name('apprentices.index');
-Route::get('apprentices/create', [ApprenticeController::class, 'create'])->name('apprentices.create');
-Route::post('apprentices', [ApprenticeController::class, 'store'])->name('apprentices.store');
-Route::delete('apprentices/{apprentice}', [ApprenticeController::class, 'destroy'])->name('apprentices.destroy');
+Route::middleware('apprentice.access')->group(function () {
+    Route::get('apprentices', [ApprenticeController::class, 'index'])->name('apprentices.index');
+    Route::get('apprentices/create', [ApprenticeController::class, 'create'])->name('apprentices.create');
+    Route::post('apprentices', [ApprenticeController::class, 'store'])->name('apprentices.store');
+    Route::delete('apprentices/{apprentice}', [ApprenticeController::class, 'destroy'])->name('apprentices.destroy');
+});
+Route::get('courses/{course}/enroll', [ApprenticeController::class, 'enrollmentForm'])->name('courses.enroll.form');
+Route::post('courses/{course}/enroll', [ApprenticeController::class, 'enroll'])->name('courses.enroll');

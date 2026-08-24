@@ -21,7 +21,7 @@ class Training_Center extends Model
 
     public function courses()
     {
-        return $this->hasMany(Course::class);
+        return $this->hasMany(Course::class, 'training_center_id');
     }
 
     public function teachers()

@@ -15,11 +15,12 @@
                     <table class="table table-striped table-hover align-middle mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Nombre</th>
+                                <th>Datos personales</th>
                                 <th>Email</th>
-                                <th>Cédula</th>
+                                <th>Documento</th>
                                 <th>Celular</th>
-                                <th>Curso</th>
+                                <th>Programa</th>
+                                <th>Centro de formación</th>
                                 <th>Computador</th>
                                 <th></th>
                             </tr>
@@ -27,18 +28,24 @@
                         <tbody>
                             @foreach ($apprentices as $apprentice)
                                 <tr>
-                                    <td>{{ $apprentice->name }}</td>
+                                    <td>{{ $apprentice->name }} {{ $apprentice->last_name }}</td>
                                     <td>{{ $apprentice->email }}</td>
-                                    <td>{{ $apprentice->document_number }}</td>
+                                    <td>{{ $apprentice->document_type ?? 'Documento' }}: {{ $apprentice->document_number }}</td>
                                     <td>{{ $apprentice->cell_number }}</td>
                                     <td>
                                         @if ($apprentice->course)
-                                            {{ $apprentice->course->course_number ?? 'Curso asignado' }}
+                                            {{ $apprentice->course->name ?? $apprentice->course->course_number }}
                                         @else
                                             <span class="text-muted">Sin curso</span>
                                         @endif
                                     </td>
-                                    <td><form action="{{ route('apprentices.destroy', $apprentice) }}" method="POST" onsubmit="return confirm('¿Eliminar este aprendiz?')">@csrf @method('DELETE')<button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button></form></td>
+                                    <td>
+                                        @if ($apprentice->course?->trainingCenter)
+                                            {{ $apprentice->course->trainingCenter->name }}
+                                        @else
+                                            <span class="text-muted">Sin centro</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         @if ($apprentice->computer)
                                             {{ $apprentice->computer->number }} / {{ $apprentice->computer->brand }}
@@ -46,6 +53,7 @@
                                             <span class="text-muted">Sin computador</span>
                                         @endif
                                     </td>
+                                    <td><form action="{{ route('apprentices.destroy', $apprentice) }}" method="POST" onsubmit="return confirm('¿Eliminar este aprendiz?')">@csrf @method('DELETE')<button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button></form></td>
                                 </tr>
                             @endforeach
                         </tbody>

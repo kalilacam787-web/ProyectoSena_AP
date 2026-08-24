@@ -5,7 +5,7 @@
     <div class="admin-heading">
         <span class="section-kicker">ADMINISTRADOR</span>
         <h1 class="welcome-title mb-2">Perfil de gestión</h1>
-        <p class="text-muted mb-0">{{ $user->name }} · {{ $user->email }}</p>
+        <p class="text-muted mb-0">Administradora: {{ $user->name }} · {{ $user->email }}</p>
     </div>
 
     @if(session('success'))
@@ -46,9 +46,19 @@
                     <h2 class="h3">Funciones disponibles</h2>
                     <div class="admin-actions">
                         <a href="{{ route('courses.index') }}" class="admin-action"><i class="fas fa-book"></i><span>Cursos</span><small>Registrar y consultar</small></a>
+                        <a href="{{ route('courses.create') }}" class="admin-action"><i class="fas fa-plus-circle"></i><span>Registrar curso</span><small>Crear una oferta educativa</small></a>
+                        <a href="{{ route('training-centers.index') }}" class="admin-action"><i class="fas fa-map-marker-alt"></i><span>Centros de formación</span><small>Registrar y consultar sedes</small></a>
+                        <a href="{{ route('training-centers.create') }}" class="admin-action"><i class="fas fa-plus-circle"></i><span>Registrar centro</span><small>Agregar una sede</small></a>
+                        <a href="{{ route('computers.index') }}" class="admin-action"><i class="fas fa-laptop"></i><span>Computadores</span><small>Administrar inventario</small></a>
+                        <a href="{{ route('computers.create') }}" class="admin-action"><i class="fas fa-plus-circle"></i><span>Registrar computador</span><small>Agregar equipo</small></a>
+                        <a href="{{ route('teachers.index') }}" class="admin-action"><i class="fas fa-chalkboard-teacher"></i><span>Instructores</span><small>Gestionar instructores</small></a>
+                        <a href="{{ route('teachers.create') }}" class="admin-action"><i class="fas fa-plus-circle"></i><span>Registrar instructor</span><small>Agregar personal formativo</small></a>
                         <a href="{{ route('apprentices.index') }}" class="admin-action"><i class="fas fa-users"></i><span>Estudiantes</span><small>Gestionar aprendices</small></a>
+                        <a href="{{ route('apprentices.create') }}" class="admin-action"><i class="fas fa-user-plus"></i><span>Registrar aprendiz</span><small>Agregar estudiante</small></a>
                         <a href="{{ route('galleries.index') }}" class="admin-action"><i class="fas fa-images"></i><span>Contenido</span><small>Actualizar información visual</small></a>
+                        <a href="{{ route('galleries.create') }}" class="admin-action"><i class="fas fa-image"></i><span>Registrar imagen</span><small>Agregar contenido visual</small></a>
                         <a href="{{ route('contacts.index') }}" class="admin-action"><i class="fas fa-envelope"></i><span>Contáctanos</span><small>Revisar mensajes y canales</small></a>
+                        <a href="{{ route('contacts.create') }}" class="admin-action"><i class="fas fa-paper-plane"></i><span>Registrar contacto</span><small>Crear un canal de contacto</small></a>
                     </div>
                 </div>
             </section>

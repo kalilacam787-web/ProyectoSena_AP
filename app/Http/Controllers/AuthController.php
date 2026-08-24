@@ -4,12 +4,58 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Teacher;
+use App\Models\Apprentice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function showApprenticeAccess()
+    {
+        return view('Auth.apprentice-access');
+    }
+
+    public function apprenticeAccess(Request $request)
+    {
+        $validated = $request->validate([
+            'document_type' => 'required|in:CC,TI,PAS',
+            'document_number' => 'required|string|max:30',
+            'password' => 'required|string',
+        ]);
+
+        $user = User::where('document_type', $validated['document_type'])
+            ->where('document_number', $validated['document_number'])
+            ->first();
+
+        if ($user && Hash::check($validated['password'], $user->password)) {
+            Auth::login($user);
+            $request->session()->regenerate();
+            return redirect()->intended(route('apprentices.index'));
+        }
+
+        $teacher = Teacher::where('document_number', $validated['document_number'])
+            ->where('access_code', $validated['password'])
+            ->first();
+
+        if ($teacher) {
+            $request->session()->regenerate();
+            $request->session()->put('instructor_id', $teacher->id);
+            return redirect()->intended(route('apprentices.index'));
+        }
+
+        $apprentice = Apprentice::where('document_type', $validated['document_type'])
+            ->where('document_number', $validated['document_number'])
+            ->first();
+
+        if ($apprentice && $apprentice->password && Hash::check($validated['password'], $apprentice->password)) {
+            $request->session()->regenerate();
+            $request->session()->put('apprentice_id', $apprentice->id);
+            return redirect()->intended(route('apprentices.index'));
+        }
+
+        return back()->withErrors(['document_number' => 'Los datos de acceso no coinciden con un registro autorizado.'])->withInput();
+    }
     /**
      * Show login form
      */
