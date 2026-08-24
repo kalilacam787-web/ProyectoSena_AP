@@ -3,6 +3,7 @@
 @section('title', 'Instructores registrados')
 
 @section('content')
+    <div class="teacher-page">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h4">Instructores registrados</h1>
         <a href="{{ route('teachers.create') }}" class="btn btn-primary">Registrar nuevo</a>
@@ -23,5 +24,6 @@
                 <p class="text-muted">No hay instructores registrados.</p>
             @endif
         </div>
+    </div>
     </div>
 @endsection

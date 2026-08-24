@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +30,19 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $request->session()->forget('instructor_id');
             return redirect()->intended('/')->with('success', 'Bienvenido');
+        }
+
+        $teacher = Teacher::where('email', $credentials['email'])
+            ->where('access_code', $credentials['password'])
+            ->first();
+
+        if ($teacher) {
+            $request->session()->regenerate();
+            $request->session()->put('instructor_id', $teacher->id);
+
+            return redirect()->route('teachers.index')->with('success', 'Bienvenido, instructor.');
         }
 
         return back()->withErrors([
@@ -73,6 +86,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->forget('instructor_id');
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

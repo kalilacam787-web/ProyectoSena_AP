@@ -619,6 +619,92 @@ table {
     box-shadow: 0 0 0 0.2rem rgba(28, 162, 87, 0.15);
 }
 
+/* Tema y controles del portal */
+:root {
+    --portal-black: #050806;
+    --portal-panel: #101712;
+    --portal-green: #35d06f;
+    --portal-soft: #a7efbd;
+}
+
+body {
+    color: #f5fff7;
+    background: radial-gradient(circle at 50% -20%, #123c22 0, var(--portal-black) 46%, #020302 100%);
+}
+
+h1, h2, h3, h4, h5, h6, .card-title, .form-label, .form-check-label {
+    color: #f5fff7;
+}
+
+.navbar-modern {
+    background: rgba(5, 12, 7, 0.94) !important;
+    border-bottom: 1px solid rgba(53, 208, 111, 0.3);
+    box-shadow: 0 5px 24px rgba(0, 0, 0, 0.35);
+}
+
+.navbar-menu-button, .btn-nav-action {
+    color: #ecfff1 !important;
+    background: transparent !important;
+    border: 1px solid rgba(53, 208, 111, 0.65) !important;
+    border-radius: 6px;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navbar-menu-button:hover, .navbar-menu-button:focus, .btn-nav-action:hover, .btn-nav-action:focus {
+    color: #031208 !important;
+    background: var(--portal-green) !important;
+    box-shadow: 0 0 18px rgba(53, 208, 111, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-nav-action { font-size: 0.82rem !important; padding: 0.5rem 0.75rem !important; }
+.btn-nav-primary { background: #168f39 !important; border-color: var(--portal-green) !important; }
+
+.dropdown-menu, .navbar-menu-dropdown {
+    color: #f5fff7;
+    background: #0c140e;
+    border: 1px solid rgba(53, 208, 111, 0.35);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.45);
+}
+
+.navbar-menu-dropdown .dropdown-item { color: #e9fff0; }
+.navbar-menu-dropdown .dropdown-item:hover, .navbar-menu-dropdown .dropdown-item:focus { color: #031208; background: var(--portal-green); }
+.admin-menu-heading { color: var(--portal-green); letter-spacing: 0.12em; font-size: 0.75rem; font-weight: 700; }
+
+.card, .admin-panel, .bg-light, .bg-white {
+    color: #f5fff7;
+    background: linear-gradient(145deg, #111b13, #080d09) !important;
+    border: 1px solid rgba(53, 208, 111, 0.22) !important;
+}
+
+.form-control, .form-select {
+    color: #f5fff7;
+    background-color: #071009;
+    border-color: #315c3e;
+}
+.form-control::placeholder { color: #86a58d; }
+.form-select option { color: #111; }
+.form-control:focus, .form-select:focus { color: #fff; background-color: #0b170d; border-color: var(--portal-green); }
+.field-error { display: none; color: #ff7373; margin-top: 0.35rem; font-size: 0.85rem; }
+.field-error.show { display: block; }
+
+.admin-shell { max-width: 1100px; margin: 0 auto; padding: 1rem 0 3rem; }
+.admin-heading { margin-bottom: 2rem; }
+.admin-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.admin-action { display: flex; flex-direction: column; gap: 0.2rem; padding: 1.1rem; color: #f5fff7; background: #0a120c; border: 1px solid #285b38; border-radius: 7px; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+.admin-action i { color: var(--portal-green); font-size: 1.25rem; margin-bottom: 0.35rem; }
+.admin-action span { font-weight: 700; }
+.admin-action small { color: var(--portal-soft); }
+.admin-action:hover { color: #fff; border-color: var(--portal-green); box-shadow: 0 8px 20px rgba(53, 208, 111, 0.16); transform: translateY(-4px); }
+
+@media (max-width: 575px) {
+    .navbar .container-fluid { gap: 0.35rem; }
+    .d-flex.align-items-center.gap-2 { gap: 0.25rem !important; }
+    .btn-nav-action { font-size: 0.68rem !important; padding: 0.45rem 0.5rem !important; }
+    .navbar-menu-button { min-width: auto; font-size: 0.85rem !important; padding: 0.45rem 0.6rem !important; }
+    .admin-actions { grid-template-columns: 1fr; }
+}
+
 /* Alerts */
 .alert {
     font-size: var(--font-size-lg);
@@ -891,6 +977,103 @@ footer p {
 
 .small {
     font-size: 0.9rem;
+}
+
+/* Ajustes finales del marco y navegación */
+html, body { min-height: 100%; }
+body { overflow-x: hidden; }
+.navbar-modern .container-fluid { background: transparent !important; }
+.navbar-modern { position: relative !important; top: auto !important; z-index: 10; }
+.app-content { width: 100%; max-width: none; padding: 0 clamp(1rem, 3vw, 3rem) 2rem; }
+.navbar-menu-button { min-width: 112px; }
+.navbar-menu-button, .navbar-menu-button.btn-nav-primary { color: #ffffff !important; }
+.navbar-menu-button:hover, .navbar-menu-button:focus { color: #031208 !important; }
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0.6rem clamp(1rem, 3vw, 3rem) 0;
+    padding: 0.35rem 0.65rem;
+    color: #eaffef;
+    background: #102919;
+    border: 1px solid #42d875;
+    border-radius: 6px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.back-button:hover,
+.back-button:focus-visible {
+    color: #031208;
+    background: #55e87d;
+    box-shadow: 0 6px 18px rgba(53, 208, 111, 0.3);
+    transform: translateX(-3px);
+}
+
+/* Contraste final para el panel de instructores y la navegación */
+.teacher-page .card {
+    background: #0b140e !important;
+    border-color: rgba(53, 208, 111, 0.45) !important;
+}
+
+.teacher-page .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: #f3fff6;
+    --bs-table-hover-color: #ffffff;
+    color: #f3fff6;
+}
+
+.teacher-page .table thead th {
+    color: #06200e !important;
+    background: #9bf2b2 !important;
+    border: 0;
+}
+
+.teacher-page .table tbody td {
+    color: #f3fff6 !important;
+    background: #0b140e !important;
+    border-color: rgba(190, 255, 205, 0.35) !important;
+}
+
+.teacher-page .table tbody tr:hover td {
+    color: #ffffff !important;
+    background: #16351f !important;
+}
+
+.teacher-page .btn-primary,
+.navbar-menu-button {
+    color: #ffffff !important;
+    background: #159447 !important;
+    border: 1px solid #65f08c !important;
+    box-shadow: 0 4px 14px rgba(21, 148, 71, 0.28);
+}
+
+.teacher-page .btn-primary:hover,
+.navbar-menu-button:hover,
+.navbar-menu-button:focus {
+    color: #031208 !important;
+    background: #55e87d !important;
+    border-color: #b8ffca !important;
+    box-shadow: 0 7px 20px rgba(53, 208, 111, 0.4);
+    transform: translateY(-2px);
+}
+
+.contact-information {
+    background: linear-gradient(145deg, #111b13, #080d09) !important;
+    border-color: rgba(53, 208, 111, 0.45) !important;
+}
+
+.contact-information strong {
+    color: #a7efbd;
+}
+
+.contact-information a {
+    color: #55e87d;
+    font-weight: 600;
+}
+
+.contact-information a:hover {
+    color: #c7ffd3;
 }
 
 .lead {

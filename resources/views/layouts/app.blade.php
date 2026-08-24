@@ -12,16 +12,25 @@
 
 <body>
 
-    <!-- Navbar -->
-    @include('includes.navbar')
+    @if (request()->path() === '/')
+        @include('includes.navbar')
+    @endif
 
-    <div class="container mt-4">
+    @if (request()->path() !== '/')
+        <button type="button" class="back-button" onclick="window.history.length > 1 ? window.history.back() : window.location.href='{{ url('/') }}'" aria-label="Volver a la página anterior" title="Volver">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            <span>Volver</span>
+        </button>
+    @endif
+
+    <main class="app-content container-fluid mt-4">
         @yield('content')
-    </div>
+    </main>
 
     @include('includes.footer')
 
     @include('includes.dependenciasbody')
+    @stack('scripts')
 
 
 </body>

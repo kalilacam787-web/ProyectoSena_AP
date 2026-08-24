@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ApprenticeController;
-use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ComputerController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CourseController;
@@ -45,16 +45,16 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/perfil', [AdminController::class, 'profile'])->name('admin.profile');
+    Route::put('/admin/perfil', [AdminController::class, 'update'])->name('admin.profile.update');
+});
+
 // Contact Routes
 Route::resource('contacts', ContactController::class);
 
 // Gallery Routes
 Route::resource('galleries', GalleryController::class);
-
-// Areas Routes
-Route::get('areas', [AreaController::class, 'index'])->name('areas.index');
-Route::get('areas/create', [AreaController::class, 'create'])->name('areas.create');
-Route::post('areas', [AreaController::class, 'store'])->name('areas.store');
 
 // Training Centers Routes
 Route::get('training-centers', [TrainingCenterController::class, 'index'])->name('training-centers.index');

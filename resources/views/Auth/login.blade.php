@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Iniciar Sesión') }}</div>
+                    <div class="card-header">{{ __('Iniciar Sesión') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('auth.login') }}">
@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="password" class="form-label">{{ __('Contraseña') }}</label>
+                            <label for="password" class="form-label">{{ __('Contraseña o código de instructor') }}</label>
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                             @error('password')
                                 <span class="invalid-feedback" role="alert">

@@ -1,20 +1,31 @@
-<nav class="navbar navbar-expand-lg navbar-modern sticky-top">
+<nav class="navbar navbar-expand-lg navbar-modern">
   <div class="container-fluid px-3">
     <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}" aria-label="Inicio SENA">
       <img src="{{ asset('imagene/Imagenes SENA/images.png') }}" alt="Logo SENA" class="sena-logo">
     </a>
 
-    <div class="dropdown">
-      <button class="btn navbar-menu-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="me-1">Menú</span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end navbar-menu-dropdown">
-        <li><a class="dropdown-item" href="{{ route('contacts.index') }}">Contactos</a></li>
-        <li><a class="dropdown-item" href="{{ route('areas.create') }}">Áreas</a></li>
+    <div class="d-flex align-items-center gap-2">
+      @if(auth()->check())
+        <a class="btn btn-nav-action btn-nav-primary" href="{{ route('admin.profile') }}">Perfil</a>
+      @else
+        <a class="btn btn-nav-action" href="{{ route('login') }}">Iniciar sesión</a>
+      @endif
+
+      <div class="dropdown">
+        <button class="btn btn-nav-action btn-nav-primary navbar-menu-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="me-1">Menú</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end navbar-menu-dropdown">
+        @auth
+          <li class="dropdown-header admin-menu-heading">ADMINISTRADOR</li>
+          <li><a class="dropdown-item admin-menu-link" href="{{ route('admin.profile') }}"><i class="fas fa-user-shield me-2"></i>Perfil y gestión</a></li>
+          <li><hr class="dropdown-divider"></li>
+        @endauth
+        <li><a class="dropdown-item" href="{{ route('contacts.index') }}">Contáctanos</a></li>
         <li><a class="dropdown-item" href="{{ route('training-centers.index') }}">Centros de formación</a></li>
         <li><a class="dropdown-item" href="{{ route('computers.index') }}">Computadores</a></li>
         <li><a class="dropdown-item" href="{{ route('courses.index') }}">Cursos</a></li>
-        <li><a class="dropdown-item" href="{{ route('teachers.index') }}">Instructores</a></li>
+        <li><a class="dropdown-item" href="{{ route('teachers.index') }}"><i class="fas fa-chalkboard-teacher me-2"></i>Instructores</a></li>
         <li><a class="dropdown-item" href="{{ route('apprentices.index') }}">Aprendices</a></li>
         <li><a class="dropdown-item" href="{{ url('/#quienes-somos') }}">Quiénes somos</a></li>
         <li><hr class="dropdown-divider"></li>
@@ -26,11 +37,9 @@
               <button type="submit" class="dropdown-item text-danger">Cerrar sesión</button>
             </form>
           </li>
-        @else
-          <li><a class="dropdown-item" href="{{ route('login') }}">Iniciar sesión</a></li>
-          <li><a class="dropdown-item" href="{{ route('register') }}">Registrarse</a></li>
         @endauth
-      </ul>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>
