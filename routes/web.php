@@ -72,6 +72,7 @@ Route::delete('computers/{computer}', [ComputerController::class, 'destroy'])->n
 
 // Courses Routes
 Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
+Route::get('courses/{course}/info', [CourseController::class, 'information'])->name('courses.information');
 Route::get('courses/create', [CourseController::class, 'create'])->name('courses.create');
 Route::post('courses', [CourseController::class, 'store'])->name('courses.store');
 

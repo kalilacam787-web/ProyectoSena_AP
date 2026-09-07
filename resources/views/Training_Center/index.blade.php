@@ -36,32 +36,64 @@
         </div>
     @else
         <h2 class="h3 mb-4">{{ $search !== '' ? 'Centros encontrados para “' . $search . '”' : 'Centros de formación disponibles' }}</h2>
-        <div class="row g-4 mb-5">
-        @foreach ($trainingCenters as $center)
-            <div class="col-md-6 col-xl-4">
-                <article class="card h-100 border-0 shadow-sm">
-                    <div class="card-body d-flex flex-column">
-                        <span class="text-success mb-2"><i class="fas fa-map-marker-alt me-2"></i>SENA Cauca</span>
-                        <h2 class="h4">{{ $center->name }}</h2>
-                        <p class="text-muted">{{ $center->location }}</p>
-                        <h3 class="h6 text-dark mt-2">Ofertas disponibles</h3>
-                        @if ($center->courses->isNotEmpty())
-                            <ul class="list-unstyled small mb-3">
-                                @foreach ($center->courses as $course)
-                                    <li class="mb-1"><i class="fas fa-check text-success me-2"></i>{{ $course->name }}</li>
-                                @endforeach
-                            </ul>
-                        @else
-                            <p class="text-muted small">No hay ofertas asignadas.</p>
-                        @endif
-                        <a class="btn btn-outline-success align-self-start" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query={{ urlencode('SENA ' . $center->name . ' ' . $center->location) }}">
-                            Ver ubicación <i class="fas fa-external-link-alt ms-1"></i>
-                        </a>
+        @foreach ($trainingCentersByLocation as $location => $centers)
+            @php
+                $carouselId = 'training-centers-' . str()->slug($location);
+                $slides = $centers->chunk(3);
+            @endphp
+            <section class="training-location-group mb-5" aria-labelledby="{{ $carouselId }}-title">
+                <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap mb-3">
+                    <h3 id="{{ $carouselId }}-title" class="h4 mb-0"><i class="fas fa-map-marker-alt text-success me-2" aria-hidden="true"></i>{{ $location }}</h3>
+                    @if ($slides->count() > 1)
+                        <span class="training-location-count">{{ $centers->count() }} centros</span>
+                    @endif
+                </div>
+                <div id="{{ $carouselId }}" class="carousel slide training-centers-carousel" data-bs-interval="false">
+                    <div class="carousel-inner">
+                        @foreach ($slides as $slideIndex => $slide)
+                            <div class="carousel-item {{ $slideIndex === 0 ? 'active' : '' }}">
+                                <div class="row g-4">
+                                    @foreach ($slide as $center)
+                                        <div class="col-md-6 col-xl-4">
+                                            <article class="card h-100 border-0 shadow-sm">
+                                                <div class="card-body d-flex flex-column">
+                                                    <span class="text-success mb-2"><i class="fas fa-map-marker-alt me-2"></i>{{ $location }}</span>
+                                                    <h2 class="h4">{{ $center->name }}</h2>
+                                                    <p class="text-muted">{{ $center->location }}</p>
+                                                    <h3 class="h6 text-dark mt-2">Ofertas disponibles</h3>
+                                                    @if ($center->courses->isNotEmpty())
+                                                        <ul class="list-unstyled small mb-3">
+                                                            @foreach ($center->courses as $course)
+                                                                <li class="mb-1"><i class="fas fa-check text-success me-2"></i>{{ $course->name }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @else
+                                                        <p class="text-muted small">No hay ofertas asignadas.</p>
+                                                    @endif
+                                                    <a class="btn btn-outline-success align-self-start" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query={{ urlencode('SENA ' . $center->name . ' ' . $center->location) }}">
+                                                        Ver ubicación <i class="fas fa-external-link-alt ms-1"></i>
+                                                    </a>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                </article>
-            </div>
+                    @if ($slides->count() > 1)
+                        <button class="carousel-control-prev training-carousel-control" type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next training-carousel-control" type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
+                    @endif
+                </div>
+            </section>
         @endforeach
-        </div>
     @endif
     </div>
 
