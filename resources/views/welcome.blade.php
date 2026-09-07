@@ -45,38 +45,37 @@
             <p class="lead welcome-subtitle mb-4">
                 Sistema de gestión integral para centros de formación SENA
             </p>
-        </div>
-
-        <div id="quienes-somos" class="card border-0 shadow-sm mb-5 bg-light about-section">
-            <div class="card-body p-5">
-                <span class="section-kicker">Nuestra identidad</span>
-                <h2 class="text-center mb-4 about-title">¿Quiénes somos?</h2>
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="p-4 rounded-3 bg-white h-100 about-panel">
-                            <div class="about-icon"><i class="fas fa-bullseye" aria-hidden="true"></i></div>
-                            <h4 class="text-success mb-3">Misión</h4>
-                            <p class="mb-0">Facilitar la gestión administrativa y académica de los aprendices, docentes y recursos del SENA para fortalecer la formación técnica y profesional.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="p-4 rounded-3 bg-white h-100 about-panel">
-                            <div class="about-icon"><i class="fas fa-eye" aria-hidden="true"></i></div>
-                            <h4 class="text-success mb-3">Visión</h4>
-                            <p class="mb-0">Ser una plataforma innovadora y eficiente que apoye la organización, seguimiento y crecimiento de la comunidad formativa del SENA.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>  
 
         <!-- Secciones principales -->
-        <div class="row g-4 mb-5 welcome-information">
+        <div class="convocatoria-row mb-4">
+            <aside id="convocatoria-anuncio" class="convocatoria-ad" aria-label="Nueva convocatoria SENA">
+                <button type="button" class="convocatoria-close" aria-label="Cerrar anuncio">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+                <div class="convocatoria-image-wrap">
+                    <img src="{{ asset('imagene/Imagenes SENA/57640 (1).jpeg') }}" alt="Nueva convocatoria de formación SENA">
+                    <span class="convocatoria-stamp">NUEVO</span>
+                </div>
+                <div class="convocatoria-content">
+                    <span class="convocatoria-kicker">Convocatorias abiertas</span>
+                    <h2>¡Llegaron nuevas convocatorias!</h2>
+                    <p class="convocatoria-lead">No te pierdas esta nueva oportunidad de estudiar, aprender y crecer con nosotros.</p>
+                    <p>Nuevas ofertas de modalidad <strong>virtual, a distancia y presencial.</strong></p>
+                    <p class="convocatoria-date">Inscríbete del <strong>01 al 20 de septiembre</strong></p>
+                    <a href="{{ route('courses.index') }}" class="btn convocatoria-button">
+                        CONOCE TODAS LAS OFERTAS AQUÍ <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </aside>
+        </div>
+
+        <div class="row g-4 mb-5 align-items-stretch welcome-information">
             <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm function-card">
+                <div class="card h-100 shadow-sm function-card offer-function-card">
                     <div class="card-body text-center">
                         <i class="fas fa-book fa-3x text-success mb-3"></i>
-                        <h3 class="card-title">Ofertas educativas</h3>
+                        <h3 class="card-title">OFERTAS EDUCATIVAS DISPONIBLES</h3>
                         <p class="card-text">Explora cursos y carreras técnicas de diferentes áreas de formación.</p>
                         <a href="{{ route('courses.index') }}" class="btn btn-success">Ver ofertas</a>
                     </div>
@@ -101,6 +100,29 @@
                         <h3 class="card-title">Gestión de Aprendices</h3>
                         <p class="card-text">Consulta programa, computador, centro de formación y datos personales.</p>
                         <a href="{{ route('apprentices.index') }}" class="btn btn-primary">Ver aprendices</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quienes-somos" class="card border-0 shadow-sm mb-5 bg-light about-section">
+            <div class="card-body p-5">
+                <span class="section-kicker">Nuestra identidad</span>
+                <h2 class="text-center mb-4 about-title">¿Quiénes somos?</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-3 bg-white h-100 about-panel">
+                            <div class="about-icon"><i class="fas fa-bullseye" aria-hidden="true"></i></div>
+                            <h4 class="text-success mb-3">Misión</h4>
+                            <p class="mb-0">Facilitar la gestión administrativa y académica de los aprendices, docentes y recursos del SENA para fortalecer la formación técnica y profesional.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-3 bg-white h-100 about-panel">
+                            <div class="about-icon"><i class="fas fa-eye" aria-hidden="true"></i></div>
+                            <h4 class="text-success mb-3">Visión</h4>
+                            <p class="mb-0">Ser una plataforma innovadora y eficiente que apoye la organización, seguimiento y crecimiento de la comunidad formativa del SENA.</p>
+                        </div>
                     </div>
                 </div>
             </div>

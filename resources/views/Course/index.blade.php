@@ -13,7 +13,7 @@
                 @php
                     $offerIcons = ['fa-code', 'fa-laptop', 'fa-briefcase', 'fa-calculator', 'fa-bolt', 'fa-utensils', 'fa-pen-nib', 'fa-truck'];
                     $offerImages = [
-                        'imagene/Imagenes SENA/64de9687d6cea.r_d.283-350-0.jpeg',
+                        'imagene/Imagenes SENA/57640 (1).jpeg',
                         'imagene/Imagenes SENA/images.jpg',
                         'imagene/Imagenes SENA/Imagen sena.jpg',
                         'imagene/Imagenes SENA/images.png',
@@ -29,13 +29,18 @@
                         'GAS-006' => 'Curso',
                         'DIS-007' => 'Curso',
                         'LOG-008' => 'Carrera técnica',
+                        'AUT-009' => 'Carrera técnica',
                     ];
                     $offerType = $offerTypes[$course->course_number] ?? 'Oferta educativa';
+                    $technicalCourses = ['ADS-001', 'SIS-002', 'ADM-003', 'CON-004', 'LOG-008', 'AUT-009'];
+                    $displayDuration = in_array($course->course_number, $technicalCourses, true)
+                        ? '14 meses'
+                        : ($course->duration_months ? $course->duration_months . ' meses' : 'Duración por definir');
                 @endphp
                 <div class="col-md-6 col-xl-4">
                     <article class="educational-offer offer-tone-{{ ($loop->index % 6) + 1 }}">
                         <div class="offer-image-wrap">
-                            <img src="{{ asset($offerImage) }}" alt="Imagen de {{ $course->name ?: 'la oferta educativa' }}" class="offer-image">
+                            <img src="{{ asset($offerImage) }}" alt="Imagen de {{ $course->name ?: 'la oferta educativa' }}" class="offer-image offer-image-{{ $course->course_number }}">
                             <span class="offer-image-label">SENA</span>
                         </div>
                         <div class="offer-topline">
@@ -44,13 +49,19 @@
                         </div>
                         <span class="offer-type"><i class="fas fa-certificate" aria-hidden="true"></i>{{ $offerType }}</span>
                         <h2>{{ $course->name ?: $course->course_number }}</h2>
-                        <a class="offer-location" href="{{ route('training-centers.index') }}">
-                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                            <span>Ubicación</span>
-                        </a>
+                        <div class="offer-actions">
+                            <a class="offer-information" href="{{ route('courses.information', $course) }}">
+                                <i class="fas fa-question-circle" aria-hidden="true"></i>
+                                <span>¿Qué es?</span>
+                            </a>
+                            <a class="offer-location" href="{{ route('training-centers.index') }}">
+                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                <span>Ubicación</span>
+                            </a>
+                        </div>
                         <div class="offer-details">
                             <span><i class="far fa-clock" aria-hidden="true"></i>{{ $course->schedule ?: $course->day }}</span>
-                            <span><i class="fas fa-hourglass-half" aria-hidden="true"></i>{{ $course->duration_months ? $course->duration_months . ' meses' : 'Duración por definir' }}</span>
+                            <span><i class="fas fa-hourglass-half" aria-hidden="true"></i>{{ $displayDuration }}</span>
                         </div>
                         <a class="offer-enroll" href="{{ route('courses.enroll.form', $course) }}">
                             <i class="fas fa-user-plus" aria-hidden="true"></i>Postularme

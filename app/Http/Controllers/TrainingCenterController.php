@@ -23,8 +23,20 @@ class TrainingCenterController extends Controller
                 });
             })
             ->get();
+        $trainingCentersByLocation = $trainingCenters->groupBy(function ($center) {
+            $parts = collect(explode(',', $center->location))
+                ->map(fn ($part) => trim($part))
+                ->filter()
+                ->values();
 
-        return view('Training_Center.index', compact('trainingCenters', 'search', 'locationOptions'));
+            if ($parts->count() >= 2) {
+                return $parts->slice(-2)->implode(', ');
+            }
+
+            return $center->location;
+        });
+
+        return view('Training_Center.index', compact('trainingCenters', 'trainingCentersByLocation', 'search', 'locationOptions'));
     }
 
     public function create()

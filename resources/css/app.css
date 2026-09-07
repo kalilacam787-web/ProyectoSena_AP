@@ -585,6 +585,255 @@ a:hover {
     transform: translateY(-2px) scale(0.99);
 }
 
+.offer-function-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(rgba(3, 18, 9, 0.78), rgba(3, 18, 9, 0.78)), url('/imagene/Imagenes%20SENA/images.jpg') center / cover no-repeat !important;
+}
+
+.offer-function-card .card-body {
+    position: relative;
+    z-index: 1;
+}
+
+.offer-function-card .card-title {
+    color: #ffffff !important;
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2rem) !important;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.85);
+}
+
+.offer-function-card .card-text {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
+}
+
+.convocatoria-ad {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid #b9d92f;
+    border-radius: 16px;
+    background: #f4f8e9;
+    color: #173d29;
+    box-shadow: 0 12px 28px rgba(7, 56, 30, 0.18);
+}
+
+.convocatoria-close {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    z-index: 2;
+    width: 2.2rem;
+    height: 2.2rem;
+    border: 0;
+    border-radius: 50%;
+    color: #ffffff;
+    background: rgba(12, 58, 35, 0.82);
+    cursor: pointer;
+}
+
+.convocatoria-image-wrap {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+    background: #08752b;
+}
+
+.convocatoria-image-wrap::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background: linear-gradient(135deg, rgba(0, 108, 52, 0.15), rgba(4, 61, 33, 0.72));
+}
+
+.convocatoria-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.convocatoria-stamp {
+    position: absolute;
+    bottom: 0.8rem;
+    left: 1rem;
+    z-index: 1;
+    padding: 0.3rem 0.65rem;
+    border-radius: 4px;
+    color: #163c28;
+    background: #d8ef38;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.convocatoria-content {
+    padding: 1.35rem 1.4rem 1.5rem;
+}
+
+.convocatoria-kicker {
+    color: #08752b;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.convocatoria-content h2 {
+    margin: 0.35rem 0 0.65rem;
+    color: #08752b;
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    font-size: clamp(1.55rem, 3vw, 2.15rem);
+    line-height: 1.08;
+}
+
+.convocatoria-content p {
+    margin-bottom: 0.7rem;
+    color: #31503c;
+    font-size: 0.94rem;
+    line-height: 1.45;
+}
+
+.convocatoria-lead {
+    font-weight: 600;
+}
+
+.convocatoria-date {
+    padding: 0.65rem 0.8rem;
+    border-left: 4px solid #b7d52a;
+    background: #e8f2c8;
+}
+
+.convocatoria-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.7rem 0.85rem !important;
+    color: #ffffff;
+    background: #08752b;
+    font-size: 0.82rem !important;
+    text-align: left;
+}
+
+.convocatoria-button:hover,
+.convocatoria-button:focus-visible {
+    color: #173d29;
+    background: #b9d92f;
+}
+
+.convocatoria-ad.is-dismissed {
+    display: none;
+}
+
+.convocatoria-row {
+    width: 100%;
+}
+
+.convocatoria-row .convocatoria-ad {
+    width: min(100%, 900px);
+    margin: 0 auto;
+    transform: translateY(-1.5rem);
+}
+
+.welcome-information {
+    margin-left: calc(var(--bs-gutter-x) * -0.5) !important;
+    margin-right: calc(var(--bs-gutter-x) * -0.5) !important;
+}
+
+.convocatoria-ad {
+    background: #073d22;
+}
+
+.convocatoria-image-wrap {
+    position: relative;
+    z-index: 1;
+    height: 230px;
+}
+
+.convocatoria-image-wrap::after {
+    background: linear-gradient(90deg, rgba(1, 42, 22, 0.72), rgba(4, 83, 42, 0.2) 70%, rgba(1, 42, 22, 0.5));
+}
+
+.convocatoria-image-wrap img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.convocatoria-content {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    padding: 1.6rem 2rem 1.8rem;
+    background: rgba(247, 251, 235, 0.95);
+}
+
+.convocatoria-content h2 {
+    color: #075d2b !important;
+    text-shadow: none;
+}
+
+.convocatoria-content p {
+    color: #214b32 !important;
+    font-size: 1.08rem;
+    line-height: 1.55;
+}
+
+.convocatoria-content .convocatoria-lead,
+.convocatoria-content p.convocatoria-lead,
+.convocatoria-content p {
+    color: #214b32 !important;
+}
+
+.convocatoria-content h2,
+.convocatoria-content .convocatoria-kicker {
+    color: #075d2b !important;
+}
+
+.convocatoria-content .convocatoria-kicker {
+    color: #075d2b !important;
+}
+
+.convocatoria-content .convocatoria-date {
+    color: #214b32 !important;
+}
+
+.convocatoria-content strong {
+    color: #063c20 !important;
+}
+
+@media (max-width: 991px) {
+    .welcome-information {
+        margin-left: calc(var(--bs-gutter-x) * -0.5) !important;
+        margin-right: calc(var(--bs-gutter-x) * -0.5) !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .convocatoria-row .convocatoria-ad {
+        transform: translateY(-0.75rem);
+    }
+
+    .convocatoria-image-wrap {
+        height: 170px;
+    }
+
+    .convocatoria-content {
+        margin-top: 0;
+        padding: 1.2rem 1rem 1.35rem;
+    }
+
+    .convocatoria-content p {
+        font-size: 0.98rem;
+    }
+}
+
 .welcome-title {
     font-family: Georgia, 'Times New Roman', serif;
     font-weight: 500;
@@ -604,9 +853,9 @@ a:hover {
 
 /* Educational offer cards */
 .educational-offer {
-    min-height: 270px;
+    min-height: 240px;
     height: 100%;
-    padding: 1.35rem;
+    padding: 1.1rem;
     border: 1px solid #dce8df;
     border-radius: 14px;
     background: #ffffff;
@@ -628,8 +877,8 @@ a:hover {
 }
 
 .offer-image-wrap {
-    height: 132px;
-    margin: -1.35rem -1.35rem 1.1rem;
+    height: 112px;
+    margin: -1.1rem -1.1rem 0.85rem;
     position: relative;
     overflow: hidden;
     background: #183d27;
@@ -764,6 +1013,196 @@ a:hover {
     color: #ffffff;
 }
 
+.offer-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+    margin: 0.2rem 0 0.9rem;
+}
+
+.offer-information,
+.offer-location {
+    margin: 0;
+}
+
+.offer-information {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid #c5e4d0;
+    border-radius: 999px;
+    color: #17643a;
+    background: #f1fbf4;
+    font-size: 0.84rem;
+    font-weight: 800;
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.offer-information:hover,
+.offer-information:focus-visible {
+    color: #ffffff;
+    background: #168f39;
+    transform: translateY(-2px);
+}
+
+.course-information-page {
+    width: min(100%, 1200px);
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+}
+
+.course-information-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 1.2rem;
+    color: #55e87d;
+    font-weight: 700;
+}
+
+.course-information-card {
+    overflow: hidden;
+    border: 1px solid rgba(53, 208, 111, 0.35);
+    border-radius: 16px;
+    background: #f5fbf2;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+}
+
+.course-information-image-wrap {
+    position: relative;
+    height: 360px;
+    overflow: hidden;
+    background: #125b32;
+}
+
+.course-information-image-wrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.course-information-image-wrap span {
+    position: absolute;
+    right: 1.2rem;
+    bottom: 1rem;
+    padding: 0.45rem 0.75rem;
+    border-radius: 6px;
+    color: #173d29;
+    background: #d8ef38;
+    font-weight: 800;
+}
+
+.course-information-body {
+    padding: clamp(2rem, 5vw, 4rem);
+    color: #193b28;
+}
+
+.course-information-body .offer-type {
+    margin-bottom: 0.7rem;
+}
+
+.course-information-body h1 {
+    margin: 0 0 1rem;
+    color: #075d2b !important;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.15;
+}
+
+.course-information-intro {
+    max-width: 720px;
+    margin-bottom: 1.4rem;
+    color: #31503c !important;
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+.course-information-details {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.6rem;
+    color: #31503c;
+}
+
+.course-information-details span {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.course-information-details i {
+    width: 1.1rem;
+    color: #159447;
+    text-align: center;
+}
+
+.course-information-learning {
+    max-width: 850px;
+    margin: 0 0 1.8rem;
+    padding: 1.2rem 1.35rem;
+    border-left: 4px solid #b9d92f;
+    border-radius: 8px;
+    background: #eaf4d7;
+}
+
+.course-information-learning h2 {
+    margin: 0 0 0.8rem;
+    color: #075d2b !important;
+    font-size: 1.2rem;
+}
+
+.course-information-learning ul {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #31503c;
+}
+
+.course-information-learning li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.course-information-learning i {
+    color: #159447;
+}
+
+.course-information-enroll {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    color: #ffffff;
+    background: #159447;
+    font-weight: 800;
+}
+
+.course-information-enroll:hover,
+.course-information-enroll:focus-visible {
+    color: #173d29;
+    background: #b9d92f;
+}
+
+@media (max-width: 575px) {
+    .course-information-page {
+        width: 100%;
+    }
+
+    .course-information-image-wrap {
+        height: 210px;
+    }
+
+    .offer-actions {
+        gap: 0.45rem;
+    }
+}
+
 .offer-enroll {
     align-self: center;
     display: inline-flex;
@@ -844,6 +1283,25 @@ a:hover {
     color: #fff7d6 !important;
     font-size: 0.92rem;
     line-height: 1.5;
+}
+
+.enrollment-register-prompt {
+    margin: 1.5rem 0 0;
+    color: #d5ebd9 !important;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.enrollment-register-prompt a {
+    color: #55e87d !important;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.enrollment-register-prompt a:hover,
+.enrollment-register-prompt a:focus-visible {
+    color: #b8ffca !important;
 }
 
 .offer-details {
@@ -1132,6 +1590,61 @@ textarea.form-control {
 .training-centers-page > .d-flex h1,
 .training-centers-page > h2 {
     color: #f5fff7 !important;
+}
+
+.training-centers-page > .d-flex .text-muted {
+    color: #ffffff !important;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.training-location-group > .d-flex h3,
+.training-location-count {
+    color: #f5fff7 !important;
+}
+
+.training-location-count {
+    padding: 0.35rem 0.75rem;
+    border: 1px solid rgba(53, 208, 111, 0.35);
+    border-radius: 999px;
+    background: rgba(8, 22, 12, 0.78);
+    font-size: 0.85rem;
+}
+
+.training-centers-carousel {
+    position: relative;
+}
+
+.training-centers-carousel .carousel-inner {
+    padding: 0.15rem 2.3rem 0.5rem;
+}
+
+.training-centers-carousel .carousel-item {
+    min-height: 100%;
+}
+
+.training-carousel-control {
+    width: 2.25rem;
+    height: 3rem;
+    top: 50%;
+    margin-top: -1.5rem;
+    border: 1px solid rgba(53, 208, 111, 0.6);
+    border-radius: 8px;
+    background: rgba(5, 24, 12, 0.86);
+    opacity: 1;
+}
+
+.training-carousel-control:hover,
+.training-carousel-control:focus-visible {
+    background: #168f39;
+}
+
+@media (max-width: 575px) {
+    .training-centers-carousel .carousel-inner {
+        padding: 0.15rem 0 0.5rem;
+    }
 }
 
 @media (max-width: 575px) {
@@ -1588,7 +2101,9 @@ body { overflow-x: hidden; }
 .app-content > h2,
 .app-content > section > h1,
 .app-content > section > h2 {
-    color: #173b28 !important;
+    color: #f5fff7 !important;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
 }
 
 .card .card-title,

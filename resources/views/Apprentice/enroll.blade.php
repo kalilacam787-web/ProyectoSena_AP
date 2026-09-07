@@ -50,5 +50,10 @@
                 <a href="{{ route('courses.index') }}" class="btn btn-outline-primary">Volver a ofertas</a>
             </div>
         </form>
+
+        <p class="enrollment-register-prompt">
+            ¿No tienes una cuenta?
+            <a href="{{ route('register') }}">Regístrate aquí</a>
+        </p>
     </div>
 @endsection
