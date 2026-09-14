@@ -3,10 +3,12 @@
 @section('title', 'Registrar Curso')
 
 @section('content')
+    {{-- Formulario para crear un curso y relacionarlo con un área y un centro. --}}
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('courses.store') }}" method="POST" class="row g-3">
+            <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
                 <h1 class="h4">Registrar Curso</h1>
+                {{-- Token obligatorio para proteger el envío POST del formulario. --}}
                 @csrf
 
                 <div class="col-md-6">
@@ -48,7 +50,8 @@
                         @endforeach
                     </select>
                 </div>
-
+  <br>
+        <input type="file" name="urlFoto" class="form-control-file" accept="image/*"">
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <a href="{{ route('courses.index') }}" class="btn btn-outline-primary ms-2">Ver registros</a>
@@ -60,6 +63,7 @@
 
     <h2 class="mt-4">Cursos registrados</h2>
     <ul class="list-group">
+        {{-- Resumen de los cursos existentes debajo del formulario de registro. --}}
         @foreach ($courses as $course)
             <li class="list-group-item">ID: {{ $course->id }} - Número: {{ $course->course_number }} - Día: {{ $course->day }} - Área: {{ $course->area_id }} - Centro: {{ $course->training_center_id }}</li>
         @endforeach

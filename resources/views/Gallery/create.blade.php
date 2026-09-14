@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Formulario para agregar una imagen, su texto alternativo y orden de aparición. --}}
 <div class="container">
     <div class="row mb-4">
         <div class="col-md-8">
@@ -11,6 +12,7 @@
     <div class="card">
         <div class="card-body">
             <form action="{{ route('galleries.store') }}" method="POST" enctype="multipart/form-data">
+                {{-- enctype permite enviar archivos junto con los demás campos. --}}
                 @csrf
 
                 <div class="mb-3">

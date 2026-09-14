@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Listado de mensajes recibidos y canales oficiales de atención. --}}
 <div class="container">
     <div class="row mb-4">
         <div class="col-md-8">
@@ -25,6 +26,7 @@
         </div>
     </section>
 
+    {{-- Mensaje temporal mostrado después de crear, editar o eliminar un contacto. --}}
     @if ($message = Session::get('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Éxito!</strong> {{ $message }}
@@ -32,6 +34,7 @@
         </div>
     @endif
 
+    {{-- La tabla solo aparece cuando existen contactos para administrar. --}}
     @if ($contacts->isNotEmpty())
         <div class="card">
             <div class="table-responsive">
@@ -48,6 +51,7 @@
                     </thead>
                     <tbody>
                         @foreach ($contacts as $contact)
+                            {{-- El estado define el color y el texto de la etiqueta. --}}
                             <tr>
                                 <td>{{ $contact->id }}</td>
                                 <td>{{ $contact->name }}</td>

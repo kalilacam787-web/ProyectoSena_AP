@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Vista de solo lectura con la información completa de un contacto. --}}
 <div class="container">
     <div class="row mb-4">
         <div class="col-md-8">

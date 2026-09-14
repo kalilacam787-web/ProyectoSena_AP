@@ -16,7 +16,8 @@ class Course extends Model
         'schedule',
         'duration_months',
         'area_id',
-        'training_center_id'
+        'training_center_id',
+        'urlFoto'
     ];
 
     public function area()
@@ -36,6 +37,6 @@ class Course extends Model
 
     public function teachers()
     {
-        return $this->belongsToMany(Teacher::class, 'course__teachers');
+        return $this->belongsToMany(Teacher::class, 'course_teacher');
     }
 }

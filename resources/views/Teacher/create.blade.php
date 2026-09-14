@@ -3,10 +3,12 @@
 @section('title', 'Registrar Instructor')
 
 @section('content')
+    {{-- Formulario administrativo para registrar un instructor y asignarlo a un área y centro. --}}
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('teachers.store') }}" method="POST" class="row g-3">
+            <form action="{{ route('teachers.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
                 <h1 class="h4">Registrar Instructor</h1>
+                {{-- Protege el envío del formulario frente a solicitudes externas. --}}
                 @csrf
 
                 <div class="col-md-6">
@@ -14,14 +16,34 @@
                     <input type="text" id="name" name="name" class="form-control" required>
                 </div>
 
-                <div class="col-md-6">
-                    <label for="document_number" class="form-label">Número de cédula</label>
+                <div class="col-md-3">
+                    <label for="document_type" class="form-label">Tipo de documento</label>
+                    <select id="document_type" name="document_type" class="form-select" required>
+                        <option value="">Seleccionar tipo</option>
+                        <option value="CC" @selected(old('document_type') === 'CC')>Cédula de ciudadanía (CC)</option>
+                        <option value="PAS" @selected(old('document_type') === 'PAS')>Pasaporte</option>
+                        <option value="OTRO" @selected(old('document_type') === 'OTRO')>Otro documento</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="document_number" class="form-label">Número de documento</label>
                     <input type="text" id="document_number" name="document_number" class="form-control" value="{{ old('document_number') }}" required>
                 </div>
 
                 <div class="col-md-6">
                     <label for="email" class="form-label">Correo</label>
                     <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="address" class="form-label">Dirección de residencia</label>
+                    <input type="text" id="address" name="address" class="form-control" value="{{ old('address') }}" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="phone" class="form-label">Número de teléfono</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" value="{{ old('phone') }}" required>
                 </div>
 
                 <div class="col-md-6">
@@ -48,7 +70,8 @@
                         @endforeach
                     </select>
                 </div>
-
+        <br>
+              <input type="file" name="urlFoto" class="form-control-file" accept="image/*">
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <a href="{{ route('teachers.index') }}" class="btn btn-outline-primary ms-2">Ver registros</a>
@@ -60,6 +83,7 @@
 
     <h2 class="mt-4">Docentes registrados</h2>
     <ul class="list-group">
+        {{-- Lista resumida para confirmar los registros existentes. --}}
         @foreach ($teachers as $teacher)
                             <li class="list-group-item">{{ $teacher->name }} - {{ $teacher->document_number }} - {{ $teacher->email }}</li>
         @endforeach

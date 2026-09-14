@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Perfil del administrador y accesos a las operaciones de gestión. --}}
 <div class="admin-shell">
     <div class="admin-heading">
         <span class="section-kicker">ADMINISTRADOR</span>
@@ -8,6 +9,7 @@
         <p class="text-muted mb-0">Administradora: {{ $user->name }} · {{ $user->email }}</p>
     </div>
 
+    {{-- Confirmación temporal después de guardar los datos del perfil. --}}
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -18,6 +20,7 @@
                 <div class="card-body p-4 p-lg-5">
                     <h2 class="h3">Datos de identificación</h2>
                     <form method="POST" action="{{ route('admin.profile.update') }}" novalidate>
+                        {{-- El formulario actualiza únicamente los datos de identificación. --}}
                         @csrf
                         @method('PUT')
                         <label class="form-label" for="document_type">Tipo de documento</label>
@@ -44,6 +47,7 @@
             <section class="card admin-panel h-100">
                 <div class="card-body p-4 p-lg-5">
                     <h2 class="h3">Funciones disponibles</h2>
+                    {{-- Enlaces a los módulos disponibles para el administrador. --}}
                     <div class="admin-actions">
                         <a href="{{ route('courses.index') }}" class="admin-action"><i class="fas fa-book"></i><span>Cursos</span><small>Registrar y consultar</small></a>
                         <a href="{{ route('courses.create') }}" class="admin-action"><i class="fas fa-plus-circle"></i><span>Registrar curso</span><small>Crear una oferta educativa</small></a>

@@ -16,6 +16,36 @@ class AuthController extends Controller
         return view('Auth.apprentice-access');
     }
 
+    public function showTeacherAccess()
+    {
+        return view('Auth.teacher-access');
+    }
+
+    public function teacherAccess(Request $request)
+    {
+        $validated = $request->validate([
+            'document_type' => 'required|in:CC,PAS,OTRO',
+            'document_number' => 'required|string|max:30',
+            'access_code' => 'required|string|max:100',
+        ]);
+
+        $teacher = Teacher::where('document_type', $validated['document_type'])
+            ->where('document_number', $validated['document_number'])
+            ->where('access_code', $validated['access_code'])
+            ->first();
+
+        if ($teacher) {
+            $request->session()->regenerate();
+            $request->session()->put('instructor_id', $teacher->id);
+
+            return redirect()->route('teachers.dashboard')->with('success', 'Bienvenido, instructor.');
+        }
+
+        return back()
+            ->withErrors(['document_number' => 'Los datos del instructor no coinciden con un registro.'])
+            ->withInput();
+    }
+
     public function apprenticeAccess(Request $request)
     {
         $validated = $request->validate([
@@ -41,7 +71,7 @@ class AuthController extends Controller
         if ($teacher) {
             $request->session()->regenerate();
             $request->session()->put('instructor_id', $teacher->id);
-            return redirect()->intended(route('apprentices.index'));
+            return redirect()->intended(route('teachers.dashboard'));
         }
 
         $apprentice = Apprentice::where('document_type', $validated['document_type'])
@@ -88,7 +118,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             $request->session()->put('instructor_id', $teacher->id);
 
-            return redirect()->route('teachers.index')->with('success', 'Bienvenido, instructor.');
+            return redirect()->route('teachers.dashboard')->with('success', 'Bienvenido, instructor.');
         }
 
         return back()->withErrors([

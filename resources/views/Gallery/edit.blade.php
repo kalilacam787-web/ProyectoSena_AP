@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Edición de una imagen existente; el archivo es opcional para conservar el actual. --}}
 <div class="container">
     <div class="row mb-4">
         <div class="col-md-8">
@@ -11,6 +12,7 @@
     <div class="card">
         <div class="card-body">
             <form action="{{ route('galleries.update', $gallery->id) }}" method="POST" enctype="multipart/form-data">
+                {{-- Se usa PUT para actualizar los datos de la imagen. --}}
                 @csrf
                 @method('PUT')
 
@@ -56,7 +58,7 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label"><strong>Imagen Actual</strong></label>
-                        <img src="{{ asset($gallery->image_path) }}" alt="{{ $gallery->title }}" class="img-fluid rounded" style="max-height: 400px; object-fit: cover;">
+                        <img src="{{ asset(str_starts_with($gallery->image_path, 'storage/') ? $gallery->image_path : 'storage/' . ltrim($gallery->image_path, '/')) }}" alt="{{ $gallery->title }}" class="img-fluid rounded" style="max-height: 400px; object-fit: cover;">
                     </div>
                 </div>
 

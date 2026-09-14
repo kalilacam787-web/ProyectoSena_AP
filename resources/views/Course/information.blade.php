@@ -3,6 +3,7 @@
 @section('title', $course->name)
 
 @section('content')
+    {{-- Detalle de una oferta: información, duración, ubicación y aprendizajes. --}}
     <div class="course-information-page">
         <a href="{{ route('courses.index') }}" class="course-information-back">
             <i class="fas fa-arrow-left" aria-hidden="true"></i> Volver a ofertas
@@ -18,6 +19,7 @@
                 <h1>{{ $course->name }}</h1>
                 <p class="course-information-intro">{{ $offerDescription }}</p>
                 @php
+                    // Las carreras técnicas tienen una duración fija en la presentación.
                     $technicalCourses = ['ADS-001', 'SIS-002', 'ADM-003', 'CON-004', 'LOG-008', 'AUT-009'];
                     $displayDuration = in_array($course->course_number, $technicalCourses, true)
                         ? '14 meses'
@@ -33,6 +35,7 @@
                 <div class="course-information-learning">
                     <h2>Lo que aprenderás</h2>
                     <ul>
+                        {{-- La lista de aprendizajes se prepara en el controlador. --}}
                         @foreach ($offerLearning as $learning)
                             <li><i class="fas fa-check" aria-hidden="true"></i>{{ $learning }}</li>
                         @endforeach

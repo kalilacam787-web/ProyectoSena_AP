@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Administración de las imágenes que aparecen en la galería principal. --}}
 <div class="container">
     <div class="row mb-4">
         <div class="col-md-8">
@@ -18,6 +19,7 @@
         </div>
     @endif
 
+    {{-- Se muestra una invitación cuando aún no existen imágenes. --}}
     @if ($galleries->isEmpty())
         <div class="alert alert-info">
             No hay imágenes en la galería. <a href="{{ route('galleries.create') }}">Agrega una imagen</a>
@@ -25,9 +27,10 @@
     @else
         <div class="row">
             @foreach ($galleries as $gallery)
+                {{-- Cada tarjeta permite consultar el estado, editar o eliminar una imagen. --}}
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 shadow-sm">
-                        <img src="{{ asset($gallery->image_path) }}" class="card-img-top" alt="{{ $gallery->title }}" style="height: 250px; object-fit: cover;">
+                        <img src="{{ asset(str_starts_with($gallery->image_path, 'storage/') ? $gallery->image_path : 'storage/' . ltrim($gallery->image_path, '/')) }}" class="card-img-top" alt="{{ $gallery->title }}" style="height: 250px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">{{ $gallery->title }}</h5>
                             <p class="card-text">{{ Str::limit($gallery->description, 100) }}</p>

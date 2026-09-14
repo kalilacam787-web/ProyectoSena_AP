@@ -9,9 +9,12 @@ class Training_Center extends Model
 {
     use HasFactory;
 
+    protected $table = 'training_centers';
+
     protected $fillable = [
         'name',
-        'location'
+        'location',
+        'urlFoto'
     ];
 
     public function areas()

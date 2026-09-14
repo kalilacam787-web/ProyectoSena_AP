@@ -36,6 +36,12 @@ class TrainingCenterController extends Controller
             return $center->location;
         });
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'data' => $trainingCenters,
+            ], 200);
+        }
+
         return view('Training_Center.index', compact('trainingCenters', 'trainingCentersByLocation', 'search', 'locationOptions'));
     }
 
@@ -52,8 +58,21 @@ class TrainingCenterController extends Controller
             'name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
         ]);
+        $trainingCenter = Training_Center::create($validated);
+        if ($request->hasFile('urlFoto')) {
+            $file = $request->file('urlFoto');
+            $nombreArchivo = 'foto_' . time() . '.' . $file->guessExtension();
+            $file->storeAs('public/images', $nombreArchivo);
+            $trainingCenter->urlFoto = $nombreArchivo;
+            $trainingCenter->save();
+        }
 
-        Training_Center::create($validated);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Centro de formación registrado correctamente.',
+                'data' => $trainingCenter->fresh(),
+            ], 201);
+        }
 
         return redirect()->route('training-centers.index')->with('success', 'Centro de formación registrado correctamente.');
     }

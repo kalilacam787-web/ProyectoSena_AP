@@ -3,14 +3,19 @@
 @section('title', 'Aprendices registrados')
 
 @section('content')
+    {{-- Tabla de aprendices con sus cursos, centros y computadores relacionados. --}}
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
         <h1 class="h4 mb-0">Aprendices registrados</h1>
-        <a href="{{ route('apprentices.create') }}" class="btn btn-primary">Registrar nuevo</a>
+        <div class="d-flex gap-2">
+            <span class="badge bg-secondary align-self-center">Total: {{ $apprentices->count() }}</span>
+            <a href="{{ route('apprentices.create') }}" class="btn btn-primary"><i class="fas fa-user-plus me-1"></i>Registrar aprendiz</a>
+        </div>
     </div>
 
     <div class="card shadow-sm">
         <div class="card-body">
             @if ($apprentices->isNotEmpty())
+                {{-- Cada fila representa un aprendiz y permite eliminarlo mediante DELETE. --}}
                 <div class="table-responsive">
                     <table class="table table-striped table-hover align-middle mb-0">
                         <thead class="table-light">
@@ -60,6 +65,7 @@
                     </table>
                 </div>
             @else
+                {{-- Estado mostrado cuando la consulta no devuelve registros. --}}
                 <p class="text-muted mb-0">No hay aprendices registrados.</p>
             @endif
         </div>

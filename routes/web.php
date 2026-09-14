@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $databaseGalleries = Gallery::where('is_active', 1)->orderBy('order')->get();
 
-    $folderPath = public_path('imagene/Imagenes SENA');
+    $folderPath = storage_path('app/public/images');
     $projectImages = collect();
 
     if (is_dir($folderPath)) {
@@ -26,7 +26,7 @@ Route::get('/', function () {
             ->map(function ($file) {
                 return (object) [
                     'title' => '',
-                    'image_path' => 'imagene/Imagenes SENA/' . basename($file),
+                    'image_path' => 'storage/images/' . basename($file),
                     'description' => '',
                     'order' => 0,
                     'is_active' => true,
@@ -47,6 +47,8 @@ Route::post('/register', [AuthController::class, 'register'])->name('auth.regist
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('apprentices/access', [AuthController::class, 'showApprenticeAccess'])->name('apprentices.access');
 Route::post('apprentices/access', [AuthController::class, 'apprenticeAccess']);
+Route::get('teachers/access', [AuthController::class, 'showTeacherAccess'])->name('teachers.access');
+Route::post('teachers/access', [AuthController::class, 'teacherAccess'])->name('teachers.access.submit');
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin/perfil', [AdminController::class, 'profile'])->name('admin.profile');
@@ -68,6 +70,8 @@ Route::post('training-centers', [TrainingCenterController::class, 'store'])->nam
 Route::get('computers', [ComputerController::class, 'index'])->name('computers.index');
 Route::get('computers/create', [ComputerController::class, 'create'])->name('computers.create');
 Route::post('computers', [ComputerController::class, 'store'])->name('computers.store');
+Route::get('computers/{computer}/edit', [ComputerController::class, 'edit'])->name('computers.edit');
+Route::put('computers/{computer}', [ComputerController::class, 'update'])->name('computers.update');
 Route::delete('computers/{computer}', [ComputerController::class, 'destroy'])->name('computers.destroy');
 
 // Courses Routes
@@ -76,10 +80,13 @@ Route::get('courses/{course}/info', [CourseController::class, 'information'])->n
 Route::get('courses/create', [CourseController::class, 'create'])->name('courses.create');
 Route::post('courses', [CourseController::class, 'store'])->name('courses.store');
 
-// Teachers Routes
-Route::get('teachers', [TeacherController::class, 'index'])->name('teachers.index');
-Route::get('teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
-Route::post('teachers', [TeacherController::class, 'store'])->name('teachers.store');
+// Instructor-only routes
+Route::middleware('instructor')->group(function () {
+    Route::get('teachers', [TeacherController::class, 'index'])->name('teachers.index');
+    Route::get('teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
+    Route::post('teachers', [TeacherController::class, 'store'])->name('teachers.store');
+    Route::get('instructor/dashboard', [TeacherController::class, 'dashboard'])->name('teachers.dashboard');
+});
 
 // Apprentices Routes
 Route::middleware('apprentice.access')->group(function () {

@@ -10,6 +10,10 @@
 
     <div class="card">
         <div class="card-body">
+            <div class="mb-3 d-flex gap-2 flex-wrap">
+                <a href="{{ route('computers.create') }}" class="btn btn-primary"><i class="fas fa-plus me-1"></i>Registrar equipo</a>
+                <span class="badge bg-secondary align-self-center">Total: {{ $computer->count() }}</span>
+            </div>
             @if ($computer->isNotEmpty())
                 <table class="table table-striped">
                     <thead>
@@ -17,7 +21,9 @@
                             <th>ID</th>
                             <th>Número</th>
                             <th>Marca</th>
+                            <th>Descripción</th>
                             <th>Estudiante asignado</th>
+                            <th>Foto</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -27,8 +33,10 @@
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->number }}</td>
                                 <td>{{ $item->brand }}</td>
+                                <td>{{ $item->description ?: 'Sin descripción' }}</td>
                                 <td>{{ $item->assigned_name ?: 'Sin asignar' }} @if($item->assigned_document)<small class="d-block text-muted">{{ $item->assigned_document }}</small>@endif</td>
-                                <td><form action="{{ route('computers.destroy', $item) }}" method="POST" onsubmit="return confirm('¿Eliminar este computador?')">@csrf @method('DELETE')<button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button></form></td>
+                                <td>@if($item->urlFoto)<img src="{{ asset('storage/images/' . $item->urlFoto) }}" alt="{{ $item->brand }}" width="64" height="48" style="object-fit: cover;">@else Sin foto @endif</td>
+                                <td class="text-nowrap"><a href="{{ route('computers.edit', $item) }}" class="btn btn-sm btn-outline-primary">Editar</a> <form class="d-inline" action="{{ route('computers.destroy', $item) }}" method="POST" onsubmit="return confirm('¿Eliminar este computador?')">@csrf @method('DELETE')<button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button></form></td>
                             </tr>
                         @endforeach
                     </tbody>

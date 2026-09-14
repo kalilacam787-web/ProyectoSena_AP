@@ -3,17 +3,20 @@
 @section('title', 'Registrar Área')
 
 @section('content')
+    {{-- Formulario para registrar un área que luego puede asociarse a cursos. --}}
     <div class="card">
         <div class="card-body">
             <form action="{{ route('areas.store') }}" method="POST" class="row g-3">
                 <h1 class="h4">Registrar Área</h1>
+                {{-- Token de seguridad de la solicitud POST. --}}
                 @csrf
 
                 <div class="col-12">
                     <label for="name" class="form-label">Nombre del área</label>
                     <input type="text" id="name" name="name" class="form-control" required>
                 </div>
-
+              <br>
+                <input type="file" name="urlFoto" class="form-control-file" accept="image/*"">
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary mt-2">Guardar</button>
                     <a href="{{ route('areas.index') }}" class="btn btn-outline-primary mt-2 ms-2">Ver registros</a>
@@ -25,6 +28,7 @@
 
     <h2 class="mt-4">Áreas registradas</h2>
     <ul class="list-group">
+        {{-- Lista de áreas existentes para facilitar la confirmación del registro. --}}
         @foreach ($areas as $area)
             <li class="list-group-item">{{ $area->name }}</li>
         @endforeach

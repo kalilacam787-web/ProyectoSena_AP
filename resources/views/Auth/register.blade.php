@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Formulario para crear una cuenta de usuario del sistema. --}}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -9,6 +10,7 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('auth.register') }}">
+                        {{-- Protección CSRF para el envío del registro. --}}
                         @csrf
 
                         <div class="form-group mb-3">
