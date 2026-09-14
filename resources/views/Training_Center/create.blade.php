@@ -3,10 +3,12 @@
 @section('title', 'Registrar Centro de Formación')
 
 @section('content')
+    {{-- Formulario para registrar una sede y su ubicación. --}}
     <div class="card">
         <div class="card-body">
             <form action="{{ route('training-centers.store') }}" method="POST" class="row g-3">
                 <h1 class="h4">Registrar Centro de Formación</h1>
+                {{-- Token requerido para crear el registro mediante POST. --}}
                 @csrf
 
                 <div class="col-md-6">
@@ -18,7 +20,8 @@
                     <label for="location" class="form-label">Ubicación</label>
                     <input type="text" id="location" name="location" class="form-control" required>
                 </div>
-
+                <br>
+                 <input type="file" name="urlFoto" class="form-control-file" accept="image/*"">
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <a href="{{ route('training-centers.index') }}" class="btn btn-outline-primary ms-2">Ver registros</a>
@@ -30,6 +33,7 @@
 
     <h2 class="mt-4">Centros de formación registrados</h2>
     <ul class="list-group">
+        {{-- Resumen de centros ya registrados. --}}
         @foreach ($trainingCenters as $center)
             <li class="list-group-item">
                 <strong>{{ $center->name }}</strong> - {{ $center->location }}

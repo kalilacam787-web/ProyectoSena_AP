@@ -4,15 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $galleries = Gallery::orderBy('order')->get();
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'data' => $galleries,
+            ], 200);
+        }
+
         return view('Gallery.index', compact('galleries'));
     }
 
@@ -38,11 +46,18 @@ class GalleryController extends Controller
 
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images/gallery'), $imageName);
-            $validated['image_path'] = 'images/gallery/' . $imageName;
+            $request->image->storeAs('images/gallery', $imageName, 'public');
+            $validated['image_path'] = 'storage/images/gallery/' . $imageName;
         }
 
-        Gallery::create($validated);
+        $gallery = Gallery::create($validated);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Imagen agregada correctamente.',
+                'data' => $gallery,
+            ], 201);
+        }
 
         return redirect()->route('galleries.index')->with('success', 'Imagen agregada correctamente.');
     }
@@ -77,14 +92,13 @@ class GalleryController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if (file_exists(public_path($gallery->image_path))) {
-                unlink(public_path($gallery->image_path));
-            }
+            // Elimina la imagen anterior desde el disco público de Laravel.
+            $oldImagePath = str_replace('storage/', '', ltrim($gallery->image_path, '/'));
+            Storage::disk('public')->delete($oldImagePath);
             
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images/gallery'), $imageName);
-            $validated['image_path'] = 'images/gallery/' . $imageName;
+            $request->image->storeAs('images/gallery', $imageName, 'public');
+            $validated['image_path'] = 'storage/images/gallery/' . $imageName;
         }
 
         $gallery->update($validated);
@@ -98,9 +112,8 @@ class GalleryController extends Controller
     public function destroy(Gallery $gallery)
     {
         // Delete image file
-        if (file_exists(public_path($gallery->image_path))) {
-            unlink(public_path($gallery->image_path));
-        }
+        $imagePath = str_replace('storage/', '', ltrim($gallery->image_path, '/'));
+        Storage::disk('public')->delete($imagePath);
 
         $gallery->delete();
         return redirect()->route('galleries.index')->with('success', 'Imagen eliminada correctamente.');

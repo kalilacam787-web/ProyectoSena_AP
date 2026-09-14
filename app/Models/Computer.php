@@ -15,6 +15,8 @@ class Computer extends Model
         'assigned_name',
         'assigned_document',
         'assigned_email',
+        'description',
+        'urlFoto',
     ];
 
     public function apprentices()

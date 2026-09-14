@@ -3,12 +3,14 @@
 @section('title', 'Acceso a gestión de aprendices')
 
 @section('content')
+    {{-- Acceso protegido para consultar y gestionar la información del aprendiz. --}}
     <div class="enrollment-panel access-panel">
         <span class="enrollment-kicker"><i class="fas fa-lock me-2"></i>Área protegida</span>
         <h1>Gestión de aprendices</h1>
         <p class="enrollment-note">Ingresa tu tipo de documento, número y contraseña para continuar.</p>
 
         <form action="{{ route('apprentices.access') }}" method="POST" class="row g-3">
+            {{-- Laravel protege el envío con un token CSRF. --}}
             @csrf
             <div class="col-md-6">
                 <label for="document_type" class="form-label">Tipo de documento</label>

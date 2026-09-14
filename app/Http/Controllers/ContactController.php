@@ -10,9 +10,16 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $contacts = Contact::all();
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'data' => $contacts,
+            ], 200);
+        }
+
         return view('Contact.index', compact('contacts'));
     }
 
@@ -37,7 +44,14 @@ class ContactController extends Controller
             'message' => 'nullable|string',
         ]);
 
-        Contact::create($validated);
+        $contact = Contact::create($validated);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Contacto creado correctamente.',
+                'data' => $contact,
+            ], 201);
+        }
 
         return redirect()->route('contacts.index')->with('success', 'Contacto creado correctamente.');
     }

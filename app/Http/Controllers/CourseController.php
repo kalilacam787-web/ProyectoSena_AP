@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $courses = Course::all();
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'data' => $courses,
+            ], 200);
+        }
 
         return view('Course.index', compact('courses'));
     }
@@ -19,10 +25,10 @@ class CourseController extends Controller
     public function information(Course $course)
     {
         $offerImages = [
-            'ADS-001' => 'imagene/Imagenes SENA/57640 (1).jpeg',
-            'SIS-002' => 'imagene/Imagenes SENA/images.jpg',
-            'ADM-003' => 'imagene/Imagenes SENA/Imagen sena.jpg',
-            'CON-004' => 'imagene/Imagenes SENA/images.png',
+            'ADS-001' => 'storage/images/Imagen sena.jpg',
+            'SIS-002' => 'storage/images/images.jpg',
+            'ADM-003' => 'storage/images/Imagen sena.jpg',
+            'CON-004' => 'storage/images/images.png',
         ];
         $offerDescriptions = [
             'ADS-001' => 'Aprende a analizar necesidades, diseñar soluciones y desarrollar aplicaciones de software para transformar ideas en herramientas digitales.',
@@ -46,7 +52,9 @@ class CourseController extends Controller
             'LOG-008' => ['Inventarios y control de almacenes', 'Compras, distribución y transporte', 'Planeación de cadenas de suministro'],
             'AUT-009' => ['Sensores y sistemas de control', 'Fundamentos de automatización industrial', 'Diagnóstico de procesos y equipos'],
         ];
-        $offerImage = $offerImages[$course->course_number] ?? 'imagene/Imagenes SENA/57640 (1).jpeg';
+        $offerImage = $course->urlFoto
+            ? 'storage/images/' . $course->urlFoto
+            : ($offerImages[$course->course_number] ?? 'storage/images/Imagen sena.jpg');
         $offerDescription = $offerDescriptions[$course->course_number] ?? 'Conoce una oportunidad de formación práctica para fortalecer tus habilidades y prepararte para nuevos retos laborales.';
         $offerLearning = $offerHighlights[$course->course_number] ?? ['Formación práctica para el trabajo', 'Desarrollo de habilidades técnicas', 'Acompañamiento durante el proceso formativo'];
 
@@ -71,12 +79,26 @@ class CourseController extends Controller
             'course_number' => 'nullable|string|max:50',
             'day' => 'nullable|string|max:100',
             'area_id' => 'nullable|exists:areas,id',
-            'training_center_id' => 'nullable|exists:training__centers,id',
+            'training_center_id' => 'nullable|exists:training_centers,id',
         ]);
 
         $validated['course_number'] = $validated['course_number'] ?? strtoupper(substr($validated['name'], 0, 3));
         $validated['day'] = $validated['day'] ?? $validated['schedule'];
-        Course::create($validated);
+        $course = Course::create($validated);
+        if ($request->hasFile('urlFoto')) {
+            $file = $request->file('urlFoto');
+            $nombreArchivo = 'foto_' . time() . '.' . $file->guessExtension();
+            $file->storeAs('public/images', $nombreArchivo);
+            $course->urlFoto = $nombreArchivo;
+            $course->save();
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Curso registrado correctamente.',
+                'data' => $course->fresh(),
+            ], 201);
+        }
 
         return redirect()->route('courses.index')->with('success', 'Curso registrado correctamente.');
     }

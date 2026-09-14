@@ -3,6 +3,7 @@
 @section('title', 'Inscripción educativa')
 
 @section('content')
+    {{-- Formulario público para postularse a la oferta seleccionada. --}}
     <div class="enrollment-panel">
         <span class="enrollment-kicker"><i class="fas fa-graduation-cap me-2"></i>Inscripción educativa</span>
         <h1>Únete a esta oferta</h1>
@@ -14,6 +15,7 @@
         </div>
 
         <form action="{{ route('courses.enroll', $course) }}" method="POST" class="row g-3">
+            {{-- La oferta se identifica en la URL y los datos se validan en el controlador. --}}
             @csrf
             <div class="col-md-6">
                 <label for="name" class="form-label">Nombre</label>

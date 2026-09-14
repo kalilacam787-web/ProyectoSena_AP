@@ -11,11 +11,15 @@ class Teacher extends Model
 
     protected $fillable = [
         'name',
+        'document_type',
         'document_number',
         'email',
+        'address',
+        'phone',
         'access_code',
         'area_id',
-        'training_center_id'
+        'training_center_id',
+        'urlFoto'
     ];
 
     public function area()
@@ -30,6 +34,6 @@ class Teacher extends Model
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class, 'course__teachers');
+        return $this->belongsToMany(Course::class, 'course_teacher');
     }
 }

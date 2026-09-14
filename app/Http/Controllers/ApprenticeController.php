@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class ApprenticeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $apprentices = Apprentice::with(['course.trainingCenter', 'computer'])->get();
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'data' => $apprentices,
+            ], 200);
+        }
 
         return view('Apprentice.index', compact('apprentices'));
     }
@@ -57,15 +63,29 @@ class ApprenticeController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'document_type' => 'required|in:CC,TI,PAS',
             'document_number' => 'required|string|max:30|unique:apprentices,document_number',
             'email' => 'required|email|max:255',
-            'password' => 'required|string|min:8|max:255',
-            'cell_number' => 'nullable|string|max:30',
+            'cell_number' => 'required|string|max:20',
             'course_id' => 'nullable|exists:courses,id',
             'computer_id' => 'nullable|exists:computers,id',
         ]);
+        $apprentice = Apprentice::create($validated);
+        if ($request->hasFile('urlFoto')) {
+            $file = $request->file('urlFoto');
+            $nombreArchivo = 'foto_' . time() . '.' . $file->guessExtension();
+            $file->storeAs('public/images', $nombreArchivo);
+            $apprentice->urlFoto = $nombreArchivo;
+            $apprentice->save();
+        }
 
-        Apprentice::create($validated);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Aprendiz registrado correctamente.',
+                'data' => $apprentice->fresh(),
+            ], 201);
+        }
 
         return redirect()->route('apprentices.index')->with('success', 'Aprendiz registrado correctamente.');
     }

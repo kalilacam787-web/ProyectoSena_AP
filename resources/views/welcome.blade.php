@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Página principal: muestra la galería, el acceso a módulos y la identidad del SENA. --}}
 <div class="container-fluid px-0">
+    {{-- El carrusel solo se genera cuando el controlador envía imágenes disponibles. --}}
     @if($galleries && count($galleries) > 0)
     <div id="galleryCarousel" class="carousel slide mb-4" data-bs-ride="carousel" data-bs-interval="8000" data-bs-wrap="true" data-bs-pause="false">
         <div class="carousel-inner">
             @foreach($galleries as $key => $gallery)
+                {{-- Se aceptan objetos Eloquent y arreglos para mantener flexible la vista. --}}
                 @php
                     $imagePath = is_object($gallery) ? $gallery->image_path : $gallery['image_path'];
                     $imageTitle = is_object($gallery) ? ($gallery->title ?? '') : ($gallery['title'] ?? '');
@@ -38,7 +41,7 @@
     </div>
     @endif
 
-    <!-- Contenido Principal -->
+    {{-- Contenido principal y accesos rápidos a las funciones del sistema. --}}
     <div class="container mt-5">
         <div class="text-center mb-5">
             <h1 class="display-4 mb-4 welcome-title">Bienvenido al SENA</h1>
@@ -47,14 +50,14 @@
             </p>
         </div>  
 
-        <!-- Secciones principales -->
+        {{-- Cada tarjeta enlaza a un módulo público del sistema. --}}
         <div class="convocatoria-row mb-4">
             <aside id="convocatoria-anuncio" class="convocatoria-ad" aria-label="Nueva convocatoria SENA">
                 <button type="button" class="convocatoria-close" aria-label="Cerrar anuncio">
                     <i class="fas fa-times" aria-hidden="true"></i>
                 </button>
                 <div class="convocatoria-image-wrap">
-                    <img src="{{ asset('imagene/Imagenes SENA/57640 (1).jpeg') }}" alt="Nueva convocatoria de formación SENA">
+                    <img src="{{ asset('storage/images/57640 (1).jpeg') }}" alt="Nueva convocatoria de formación SENA">
                     <span class="convocatoria-stamp">NUEVO</span>
                 </div>
                 <div class="convocatoria-content">
@@ -170,7 +173,7 @@
             </div>
             <div class="col-md-6">
                 <div class="quick-access-image mb-4">
-                    <img src="{{ asset('imagene/Imagenes SENA/64de9687d6cea.r_d.283-350-0.jpeg') }}" alt="Comunidad SENA en formación">
+                    <img src="{{ asset('storage/images/64de9687d6cea.r_d.283-350-0.jpeg') }}" alt="Comunidad SENA en formación">
                 </div>
                 <h3 class="mb-3">Acceso Rápido</h3>
                 <div class="btn-group-vertical w-100" role="group">

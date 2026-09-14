@@ -3,6 +3,7 @@
 @section('title', 'Ofertas educativas')
 
 @section('content')
+    {{-- Lista pública de ofertas educativas recibidas desde el controlador. --}}
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h4">Ofertas educativas</h1>
     </div>
@@ -10,16 +11,19 @@
     @if ($courses->isNotEmpty())
         <div class="row g-4 educational-offers">
             @foreach ($courses as $course)
+                {{-- Se calculan datos visuales y textos derivados sin modificar el modelo. --}}
                 @php
                     $offerIcons = ['fa-code', 'fa-laptop', 'fa-briefcase', 'fa-calculator', 'fa-bolt', 'fa-utensils', 'fa-pen-nib', 'fa-truck'];
                     $offerImages = [
-                        'imagene/Imagenes SENA/57640 (1).jpeg',
-                        'imagene/Imagenes SENA/images.jpg',
-                        'imagene/Imagenes SENA/Imagen sena.jpg',
-                        'imagene/Imagenes SENA/images.png',
+                        'storage/images/Imagen sena.jpg',
+                        'storage/images/images.jpg',
+                        'storage/images/Imagen sena.jpg',
+                        'storage/images/images.png',
                     ];
                     $offerIcon = $offerIcons[$loop->index % count($offerIcons)];
-                    $offerImage = $offerImages[$loop->index % count($offerImages)];
+                    $offerImage = $course->urlFoto
+                        ? 'storage/images/' . $course->urlFoto
+                        : $offerImages[$loop->index % count($offerImages)];
                     $offerTypes = [
                         'ADS-001' => 'Carrera técnica',
                         'SIS-002' => 'Carrera técnica',
@@ -72,6 +76,7 @@
             @endforeach
         </div>
     @else
+        {{-- Estado vacío cuando todavía no existen cursos registrados. --}}
         <div class="empty-offers">
             <i class="fas fa-graduation-cap" aria-hidden="true"></i>
             <p>No hay ofertas educativas registradas.</p>

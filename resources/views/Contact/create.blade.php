@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Formulario público para enviar un mensaje de contacto. --}}
 <div class="container">
     <div class="row mb-4">
         <div class="col-md-8">
@@ -11,6 +12,7 @@
     <div class="card">
         <div class="card-body">
             <form action="{{ route('contacts.store') }}" method="POST">
+                {{-- Token obligatorio para aceptar la solicitud POST. --}}
                 @csrf
 
                 <div class="mb-3">

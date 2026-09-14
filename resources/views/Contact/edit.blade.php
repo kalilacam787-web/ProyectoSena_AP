@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Formulario administrativo para actualizar los datos y estado del contacto. --}}
 <div class="container">
     <div class="row mb-4">
         <div class="col-md-8">
@@ -11,6 +12,7 @@
     <div class="card">
         <div class="card-body">
             <form action="{{ route('contacts.update', $contact->id) }}" method="POST">
+                {{-- Laravel convierte esta solicitud POST en una actualización PUT. --}}
                 @csrf
                 @method('PUT')
 

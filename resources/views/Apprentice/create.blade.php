@@ -3,15 +3,32 @@
 @section('title', 'Registrar Aprendiz')
 
 @section('content')
+    {{-- Formulario de alta de un aprendiz y asignación de curso y computador. --}}
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('apprentices.store') }}" method="POST" class="row g-3">
+            <form action="{{ route('apprentices.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
                 <h1 class="h4">Registrar Aprendiz</h1>
+                {{-- Token de seguridad requerido por Laravel para el método POST. --}}
                 @csrf
 
                 <div class="col-md-6">
                     <label for="name" class="form-label">Nombre</label>
                     <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="last_name" class="form-label">Apellido</label>
+                    <input type="text" id="last_name" name="last_name" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="document_type" class="form-label">Tipo de documento</label>
+                    <select id="document_type" name="document_type" class="form-select" required>
+                        <option value="">Seleccionar tipo</option>
+                        <option value="CC">Cédula de ciudadanía</option>
+                        <option value="TI">Tarjeta de identidad</option>
+                        <option value="PAS">Pasaporte</option>
+                    </select>
                 </div>
 
                 <div class="col-md-6">
@@ -53,7 +70,8 @@
                         @endforeach
                     </select>
                 </div>
-
+             <br>
+                   <input type="file" name="urlFoto" class="form-control-file" accept="image/*">
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <a href="{{ route('apprentices.index') }}" class="btn btn-outline-primary ms-2">Ver registros</a>
@@ -65,6 +83,7 @@
 
     <h2 class="mt-4">Aprendices registrados</h2>
     <ul class="list-group">
+        {{-- Resumen de aprendices registrados enviado por el controlador. --}}
         @foreach ($apprentices as $apprentice)
             <li class="list-group-item">ID: {{ $apprentice->id }} - Nombre: {{ $apprentice->name }} - Email: {{ $apprentice->email }} - Celular: {{ $apprentice->cell_number }} - Curso_id: {{ $apprentice->course_id }} - Computador_id: {{ $apprentice->computer_id }}</li>
         @endforeach

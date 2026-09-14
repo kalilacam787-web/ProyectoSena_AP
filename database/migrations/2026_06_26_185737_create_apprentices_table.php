@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('cell_number');
+            $table->string('urlFoto')->nullable();
 
             // llaves foraneas de courses y computers
             $table->unsignedBigInteger('course_id')->nullable();

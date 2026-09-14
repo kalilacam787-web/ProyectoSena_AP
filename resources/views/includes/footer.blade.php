@@ -2,7 +2,7 @@
     <div class="container site-footer-content">
         <div class="site-footer-heading">
             <a class="site-footer-brand" href="{{ url('/') }}" aria-label="Inicio SENA">
-                <img src="{{ asset('imagene/Imagenes SENA/images.png') }}" alt="Logo SENA">
+                <img src="{{ asset('storage/images/images.png') }}" alt="Logo SENA">
             </a>
             <h2>Servicio Nacional de Aprendizaje<br>SENA</h2>
         </div>

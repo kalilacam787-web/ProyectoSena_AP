@@ -160,7 +160,7 @@ a:hover {
     min-height: 480px;
     overflow: hidden;
     border: 1px solid rgba(57, 211, 83, 0.22) !important;
-    background-image: url('/imagene/Imagenes%20SENA/IMAGEN%202.webp') !important;
+    background-image: url('/storage/images/IMAGEN%202.webp') !important;
     background-position: center;
     background-size: cover;
 }
@@ -588,7 +588,7 @@ a:hover {
 .offer-function-card {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(3, 18, 9, 0.78), rgba(3, 18, 9, 0.78)), url('/imagene/Imagenes%20SENA/images.jpg') center / cover no-repeat !important;
+    background: linear-gradient(rgba(3, 18, 9, 0.78), rgba(3, 18, 9, 0.78)), url('/storage/images/images.jpg') center / cover no-repeat !important;
 }
 
 .offer-function-card .card-body {
@@ -1524,6 +1524,213 @@ textarea.form-control {
 .admin-action small { color: var(--portal-soft); }
 .admin-action:hover { color: #fff; border-color: var(--portal-green); box-shadow: 0 8px 20px rgba(53, 208, 111, 0.16); transform: translateY(-4px); }
 
+.instructor-dashboard {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 1rem 0 3rem;
+}
+
+.instructor-dashboard-heading {
+    margin-bottom: 1.5rem;
+}
+
+.instructor-kicker {
+    display: inline-flex;
+    align-items: center;
+    color: #55e87d;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.instructor-dashboard-heading h1 {
+    margin: 0.6rem 0 0.45rem;
+    color: #f5fff7;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+.instructor-dashboard-heading p {
+    margin: 0;
+    color: #b9d5bf;
+    font-size: 1.05rem;
+}
+
+.instructor-profile-summary {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.instructor-profile-summary > div {
+    display: flex;
+    min-height: 92px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 1rem;
+    border: 1px solid rgba(53, 208, 111, 0.3);
+    border-radius: 10px;
+    background: linear-gradient(145deg, rgba(17, 27, 19, 0.95), rgba(8, 13, 9, 0.95));
+}
+
+.instructor-profile-summary strong {
+    color: #55e87d;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.instructor-profile-summary span {
+    overflow-wrap: anywhere;
+    color: #f5fff7;
+}
+
+.instructor-personal-button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1.15rem 1.35rem;
+    border: 1px solid rgba(53, 208, 111, 0.45);
+    border-radius: 14px;
+    color: #f5fff7;
+    background: linear-gradient(145deg, #111b13, #080d09);
+    text-align: left;
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.instructor-personal-button:hover,
+.instructor-personal-button:focus-visible {
+    border-color: #55e87d;
+    box-shadow: 0 12px 24px rgba(53, 208, 111, 0.16);
+    transform: translateY(-3px);
+}
+
+.instructor-personal-button > i:first-child {
+    color: #55e87d;
+    font-size: 1.8rem;
+}
+
+.instructor-personal-button span {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.instructor-personal-button small {
+    color: #b9d5bf;
+}
+
+.instructor-personal-button > i:last-child {
+    color: #55e87d;
+}
+
+.instructor-personal-modal {
+    border: 1px solid rgba(53, 208, 111, 0.45);
+    color: #f5fff7;
+    background: linear-gradient(145deg, #111b13, #080d09);
+}
+
+.instructor-personal-modal .modal-header {
+    border-bottom-color: rgba(53, 208, 111, 0.25);
+}
+
+.instructor-personal-modal .modal-title {
+    color: #55e87d;
+    font-size: 1.25rem;
+}
+
+.personal-information-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.personal-information-grid > div {
+    display: flex;
+    min-height: 74px;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.85rem;
+    border: 1px solid rgba(53, 208, 111, 0.25);
+    border-radius: 9px;
+    background: rgba(8, 22, 12, 0.72);
+}
+
+.personal-information-grid strong {
+    color: #55e87d;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.personal-information-grid span {
+    overflow-wrap: anywhere;
+}
+
+.instructor-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.instructor-action {
+    display: flex;
+    min-height: 170px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.7rem;
+    padding: 1.35rem;
+    border: 1px solid rgba(53, 208, 111, 0.34);
+    border-radius: 14px;
+    color: #f5fff7;
+    background: linear-gradient(145deg, #111b13, #080d09);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+    text-decoration: none;
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+
+.instructor-action:hover,
+.instructor-action:focus-visible {
+    color: #ffffff;
+    border-color: #55e87d;
+    background: linear-gradient(145deg, #15351f, #0b170d);
+    box-shadow: 0 14px 28px rgba(53, 208, 111, 0.18);
+    transform: translateY(-5px);
+}
+
+.instructor-action i {
+    color: #55e87d;
+    font-size: 1.8rem;
+}
+
+.instructor-action strong {
+    display: block;
+    font-size: 1.15rem;
+}
+
+.instructor-action span {
+    color: #b9d5bf;
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+    .instructor-profile-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .instructor-actions-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 575px) {
+    .instructor-profile-summary,
+    .instructor-actions-grid { grid-template-columns: 1fr; }
+    .instructor-action { min-height: 145px; }
+    .personal-information-grid { grid-template-columns: 1fr; }
+}
+
 .location-search-panel {
     padding: 1.25rem;
     border: 1px solid rgba(53, 208, 111, 0.35);
@@ -1578,7 +1785,7 @@ textarea.form-control {
     min-height: 100vh;
     margin: 0 calc(clamp(1rem, 3vw, 3rem) * -1);
     padding: 2rem clamp(1rem, 3vw, 3rem) 4rem;
-    background: linear-gradient(rgba(3, 13, 7, 0.56), rgba(3, 13, 7, 0.7)), url('/imagene/Imagenes%20SENA/Foto%20mejorada.jpeg') center / cover fixed no-repeat;
+    background: linear-gradient(rgba(3, 13, 7, 0.56), rgba(3, 13, 7, 0.7)), url('/storage/images/Foto%20mejorada.jpeg') center / cover fixed no-repeat;
 }
 
 .training-centers-page .location-search-panel,
@@ -2049,7 +2256,7 @@ body { overflow-x: hidden; }
 }
 
 .about-section {
-    background: linear-gradient(rgba(3, 13, 7, 0.38), rgba(3, 13, 7, 0.38)), url('/imagene/Imagenes%20SENA/IMAGEN%202.webp') center / cover no-repeat !important;
+    background: linear-gradient(rgba(3, 13, 7, 0.38), rgba(3, 13, 7, 0.38)), url('/storage/images/IMAGEN%202.webp') center / cover no-repeat !important;
 }
 
 /* Contraste final de la página de ofertas */

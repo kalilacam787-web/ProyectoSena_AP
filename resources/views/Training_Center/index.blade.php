@@ -3,6 +3,7 @@
 @section('title', 'Centros de formación')
 
 @section('content')
+    {{-- Consulta de centros agrupados por ubicación y filtrables por texto. --}}
     <div class="training-centers-page">
     <div class="d-flex justify-content-between align-items-center mb-4 gap-3 flex-wrap">
         <div>
@@ -13,6 +14,7 @@
     </div>
 
     <form method="GET" action="{{ route('training-centers.index') }}" class="location-search-panel mb-5">
+        {{-- GET conserva el término de búsqueda en la URL y permite compartir el resultado. --}}
         <label for="location" class="form-label"><i class="fas fa-search me-2" aria-hidden="true"></i>Buscar ubicación</label>
         <div class="location-search-row">
             <input type="search" id="location" name="location" value="{{ $search }}" class="form-control" list="location-options" placeholder="Ejemplo: Popayán, Puerto Tejada o Santander de Quilichao" aria-label="Buscar centro por ubicación" autocomplete="off">
@@ -29,6 +31,7 @@
     </form>
 
     @if ($trainingCenters->isEmpty())
+        {{-- Estado vacío cuando ningún centro coincide con el filtro. --}}
         <div class="location-search-empty">
             <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
             <h2>No encontramos centros</h2>
@@ -38,6 +41,7 @@
         <h2 class="h3 mb-4">{{ $search !== '' ? 'Centros encontrados para “' . $search . '”' : 'Centros de formación disponibles' }}</h2>
         @foreach ($trainingCentersByLocation as $location => $centers)
             @php
+                // Cada ubicación tiene un carrusel independiente para sus centros.
                 $carouselId = 'training-centers-' . str()->slug($location);
                 $slides = $centers->chunk(3);
             @endphp

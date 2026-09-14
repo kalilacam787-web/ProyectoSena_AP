@@ -3,9 +3,11 @@
 @section('title', 'Registrar Computador')
 
 @section('content')
+    {{-- Formulario para registrar un computador y, opcionalmente, su persona asignada. --}}
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('computers.store') }}" method="POST" class="row g-3">
+            <form action="{{ route('computers.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
+                {{-- Token de protección para la solicitud de creación. --}}
                 @csrf
 
                 <div class="col-md-6">
@@ -34,6 +36,12 @@
                 </div>
 
                 <div class="col-12">
+                    <label for="description" class="form-label">Descripción del equipo</label>
+                    <textarea id="description" name="description" class="form-control" rows="3"></textarea>
+                </div>
+          <br>
+             <input type="file" name="urlFoto" class="form-control-file" accept="image/*">
+                <div class="col-12">
                     <button type="submit" class="btn btn-primary">Registrar</button>
                     <a href="{{ route('computers.index') }}" class="btn btn-outline-primary ms-2">Ver registros</a>
                 </div>
@@ -41,5 +49,6 @@
         </div>
     </div>
 
+    {{-- El controlador puede devolver el registro creado como mensaje de sesión. --}}
     <pre class="mt-3 bg-light p-3">{{ session('record') }}</pre>
 @endsection

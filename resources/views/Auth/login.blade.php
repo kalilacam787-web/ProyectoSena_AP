@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Formulario de autenticación para administradores e instructores. --}}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -9,11 +10,13 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('auth.login') }}">
+                        {{-- Laravel valida este token antes de aceptar el formulario. --}}
                         @csrf
 
                         <div class="form-group mb-3">
                             <label for="email" class="form-label">{{ __('Correo Electrónico') }}</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            {{-- Los errores de validación se muestran junto al campo correspondiente. --}}
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
